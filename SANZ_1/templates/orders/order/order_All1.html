@@ -1,0 +1,91 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ title }}
+
+{% endblock %}
+
+
+
+
+{% block content %}
+    <div>
+        <h1> Список санитарно-эпидемиологических заключений </h1>
+           {{ info }}<br>
+        <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Введите номер">
+    <input type="submit" value="Поиск">
+{#        {% if perms.Boormag.add_Aythor %}#}
+{#    <a href="{% url 'add_author_view' %}" class="btn  btn-outline-primary">Добавить автора</a><br>#}
+{#    {% endif %}#}
+            <div class="m-lg-4">
+            {% for item in object_list %}
+
+                <div class="card" style="width: 80rem;">
+
+
+
+                    <div class="card-body">
+                        <p>Номер санитарно-эпидемиологического заключения: {{ item.SEZ.Nomer }}</p>
+                        <p>Типографский номер бланка: {{ item.SEZ.tipogr }}</p>
+                        <p>Заявитель: {{ item.product.predpr }}</p>
+                        <p>Вид деятельности: {{ item.product.vid }}</p>
+                        <p>Наименование деятельности: {{ item.product.dejat }}</p>
+                        <p>Фактический адрес осуществления деятельности: {{ item.product.fact_adr }}</p>
+                        <p>Юридический адрес: {{ item.product.adres_Applicant }}</p>
+
+{#                        <p>Дата регистрации: {{ item.date_creation }}</p>#}
+{#                        <p>Предполагаемая дата оказания государственной услуги: {{ item.date_rendering }}</p>#}
+{#                        <p>Заявитель: {{ item.predpr }}</p>#}
+{#                        <p>Вид деятельности: {{ item.vid  }}</p>#}
+{#                        <p>Наименование деятельности: {{ item.dejat  }}</p>#}
+{#                        <p>Номер санитарно-эпидемиологического заключения: {{ item.Nomer  }}</p>#}
+{#                        <a href="{% url 'one_SEZ' item.pk %} " class="btn btn-primary">Подробнее</a>#}
+                    </div>
+                </div>
+
+                {% endfor %}
+        </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-lg justify-content-center">
+
+                {% if page_obj.has_previous %} {# Проверка наличии предыдущей страницы #}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            {# ^получения номера предыдущей страницы^ #}
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for p in page_obj.paginator.page_range %} {# Перечисление страниц из пагинатора #}
+                    {% if p == page_obj.number %} {# Проверка текущей страницы со списком страницы #}
+                        {# Отображение страницы на которой находится пользователь #}
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ p }}</a></li>
+                        {# Вывод всех остальных страниц #}
+                    {% elif p > page_obj.number|add:-3 and p > page_obj.number|add:3 %}
+                        {# p &gt; page_obj.number - 3 #} {# 8 &gt; 10 - 3 #}
+                        <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                {% if page_obj.has_next %} {# Проверка наличия следующей страницы #}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            {# ^получения номера следующей страницы^ #}
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+{% endblock %}
+
+</body></html>

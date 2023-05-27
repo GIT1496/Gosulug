@@ -1,0 +1,21 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block content %}
+<h1>Результат поиска</h1>
+
+<ul>
+{% if object_list %}
+  {% for item in object_list %}
+ <div>
+     <li>Номер СЭЗ:  {{ item.SEZ.Nomer }},
+      </li><li>  Заявитель: {{ item.product.predpr }}, Дата оказания услуги:  {{ item.SEZ.date_creation}}, Вид деятельности:  {{ item.product.vid }}, Наименование деятельности: {{ item.product.dejat }}, Адрес осуществления деятельности:  {{ item.product.fact_adr }}, Юридический адрес:  {{ item.product.adres_Applicant }}
+ </li></div>
+
+     {% endfor %}
+ {% else %}
+<p>Не найдено ниодного СЭЗ <br>Попробуйте повторить запрос с другой формулировкой</p>
+{% endif %}
+</ul>
+
+{% endblock %}
+</body></html>

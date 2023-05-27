@@ -1,0 +1,26 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block title %}
+    Добавление решения
+{% endblock %}
+
+{% block content %}
+    <form  enctype="multipart/form-data" method="post" >
+        {% csrf_token %}
+
+         {{ form.as_p }}
+{##}
+{#            {{ form.namber }}#}
+{#            {{ form.date_creation }}#}
+{#            {{ form.applic }}#}
+{#            <input type="file" name="photo">#}
+
+        <table></table>
+        <input class="btn btn-success" type="submit" value="Добавить решение">
+    </form>
+{% endblock %}
+</body></html>
+
+
+
+

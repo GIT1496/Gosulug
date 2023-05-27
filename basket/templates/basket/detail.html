@@ -1,0 +1,72 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Внесение документов по заявлениям
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+            {% for item in basket %}
+                {% with product_obj=item.SEZ %}
+
+            <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Номер заявления</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Дата оказания услуги</th>
+                <th scope="col">Предприятие</th>
+                <th scope="col">Вид деятельности</th>
+                <th scope="col">Наименование деятельности</th>
+                <th scope="col">Удаление</th>
+            </tr>
+  </thead>
+  <tbody>
+    <tr class="table-active">
+      </tr></tbody><tbody>
+            <tr>
+                        <th scope="row">
+                                        <a href="{{ product_obj.get_absolute_url }}">{{ product_obj.namber }}
+                            </a>
+                        </th>
+                        <td> {{ product_obj.date_creation }} </td>
+                        <td> {{ product_obj.date_rendering }} </td>
+                        <td> {{ product_obj.predpr }} </td>
+                        <td> {{ product_obj.vid }} </td>
+                        <td> {{ product_obj.dejat }} </td>
+
+                <td>
+{#                            <a href="{% url 'remove_basket_prod' product_obj.pk %}" class="btn btn-danger">Удалить</a>#}
+                        </td>
+                    </tr><tr>
+            </tr>
+                                                        {% endwith %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+            <a href="{% url 'list_SEZ_view' %}" class="btn btn-info">Выбрать еще одно заявление</a>
+            <a href="{% url 'order_create'  %}" class="btn btn-success"> Внести СЭЗ </a>
+            <a href="{% url 'order_create2'  %}" class="btn btn-success"> Внести лицензию </a>
+            <a href="{% url 'order_create1'  %}" class="btn btn-danger"> Внести отказ </a>
+            <a href="{% url 'clear_basket_prod' %}" class="btn btn-danger">Очистить</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+</body></html>
+
+
+
+
+
+
+
+
+
+

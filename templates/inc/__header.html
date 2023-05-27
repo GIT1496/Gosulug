@@ -1,0 +1,83 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body><header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+
+        <li class="nav-item"><a href="{% url 'index_library' %}" class="nav-link active" aria-current="page">Домашняя страница</a></li>
+          </ul>
+        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Списки выданных документов
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item"  href="{% url 'list_SANZ_view' %}" >Список санитарно-эпидемиологических заключений</a></li>
+    <li><a class="dropdown-item"  href="{% url 'list_SANZ_RESH_view' %}" >Список выданных решений</a></li>
+    <li><a class="dropdown-item" href="{% url 'otkaz_SANZ_view' %}" > Список отказов на СЭЗ </a></li>
+    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+  </ul>
+</div>
+
+        <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Списки заявлений
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+           {% if perms.Gosulug.add_Reestr_1 %}
+        <a href="{% url 'list_SEZ_view' %}" class="dropdown-item" >Список заявлений на СЭЗ</a>
+      {% endif %}
+            {% if perms.Gosulug.add_Reestr_1 %}
+        <a href="{% url 'list_RESH_view' %}" class="dropdown-item" >Список заявлений на Решение об установлении санитарно-защитной зоны</a>
+       {% endif %}
+    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+  </ul>
+</div>
+{#        <li class="navbar-brand"><a href="{% url 'home' %}" class="btn btn-outline-primary">Поиск СЭЗ</a></li>#}
+                <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Добавить заявление
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        {% if perms.core.add_Reestr_1 %}
+    <a href="{% url 'add_SEZ_view' %}" class="dropdown-item"> Добавить заявление на СЭЗ </a>
+        {% endif %}
+   {% if perms.Gosulug.add_Reestr_2 %}
+     <a href="{% url 'add_RESH_view' %}" class="dropdown-item"> Добавить заявление на Решение </a>
+         {% endif %}
+    </ul>
+</div>
+
+    <div class="col-md-3 text-lg-end">
+
+        {% if user.is_authenticated %}
+                        <a href="{% url 'admin:index' %}" class="btn btn-info">Административная панель</a>
+            <a href="{% url 'logout' %}" class="btn btn-primary">Выход</a>
+        {% else %}
+            <a href="{% url 'registration' %}" class="btn btn-primary">Регистрация</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Авторизация</a>
+        {% endif %}
+    </div>
+
+
+
+</header>
+
+</body></html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

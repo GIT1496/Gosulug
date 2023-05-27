@@ -1,0 +1,61 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    Внесение документов по заявлениям
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+            {% for item in basket %}
+                {% with product_obj=item.RES1 %}
+
+            <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Номер заявления</th>
+                <th scope="col">Дата создания</th>
+                <th scope="col">Дата оказания услуги</th>
+                <th scope="col">Наименование заявителя, представителя заявителя</th>
+                <th scope="col">Фактический адрес осуществления деятельности</th>
+                <th scope="col">Класс опасности</th>
+                <th scope="col">Удаление</th>
+            </tr>
+  </thead>
+  <tbody>
+    <tr class="table-active">
+      </tr></tbody><tbody>
+            <tr>
+                        <th scope="row">
+                                        <a href="{{ product_obj.get_absolute_url }}">{{ product_obj.namber }}
+                            </a>
+                        </th>
+                        <td> {{ product_obj.date_creation }} </td>
+                        <td> {{ product_obj.date_rendering }} </td>
+                        <td> {{ product_obj.Applicant }} </td>
+                        <td> {{ product_obj.fact_adr }} </td>
+                        <td> {{ product_obj.cl }} </td>
+
+                <td>
+
+                        </td>
+                    </tr><tr>
+            </tr>
+                                                        {% endwith %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <div>
+            <a href="{% url 'list_RESH_view' %}" class="btn btn-info">Выбрать еще одно заявление</a>
+            <a href="{% url 'order_create3'  %}" class="btn btn-success"> Внести решение </a>
+            <a href="{% url 'order_create_resh'  %}" class="btn btn-danger"> Внести отказ </a>
+            <a href="{% url 'clear_basket_prod' %}" class="btn btn-danger">Очистить</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+</body></html>

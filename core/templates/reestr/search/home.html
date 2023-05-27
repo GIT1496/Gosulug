@@ -1,0 +1,15 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block content %}
+<h1>Страница поиска СЭЗ и отказов</h1>
+
+<form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Введите номер заявления">
+    <input type="submit" value="Поиск заявления">
+</form>
+    <form action="{% url 'search_results1' %}" method="get">
+  <input name="q" type="text" placeholder="Введите номер письма">
+    <input type="submit" value="Поиск заявления">
+</form>
+
+{% endblock %}</body></html>

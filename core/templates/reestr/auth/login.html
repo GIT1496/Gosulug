@@ -1,0 +1,14 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-success" type="submit" value="Авторизироваться">
+    </form>
+    <a href="{% url 'registration' %}" class="btn btn-info">Регистрация</a>
+{% endblock %}</body></html>

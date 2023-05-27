@@ -1,0 +1,46 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block title %}
+    Регистрация заявления
+{% endblock %}
+
+{% block content %}
+
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <div class="col">
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+
+                        {% if field.name != 'date_of_brith' %}
+                            <div class="form-floating mb-4">
+
+                                {{ field }}
+                                <label class="form-control-plaintext" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            </div>
+
+                            {{ field.errors }}
+
+                        {% else %}
+                            <div class="container text-center mb-6">
+                                {{ field }}
+                                <label class="form-check-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            </div>
+
+                            {{ field.errors }}
+
+                        {% endif %}
+                    {% endfor %}
+                    <br><br>
+                    <input class="btn btn-success" type="submit" value="Зарегистрировать заявление">
+
+                </form>
+
+                <a class="btn btn-info" href="{% url 'list_SEZ_view' %}">Назад</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+</body></html>
