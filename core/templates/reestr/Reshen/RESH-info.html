@@ -5,26 +5,100 @@
 {% endblock %}
 
 {% block content %}
-    <p>Номер заявления: {{ RES1_item.namber }}</p>
-    <p>Дата регистрации заявления: {{ RES1_item.date_creation }}</p>
-    <p>Дата окзаания услуги: {{ RES1_item.date_creation }}</p>
-    <p>Фактический адрес объекта: {{ RES1_item.fact_adr }}</p>
-    <p>Тип СЗЗ: {{RES1_item.Type_application }}</p>
-    <p>Класс объекта: {{ RES1_item.cl }}</p>
-    <p>Тип объекта: {{ RES1_item.Object  }}</p>
-    <p>Наименование заявителя, представителя заявителя: {{ RES1_item.Applicant  }}</p>
-    <p>Юридический адрес заявителя, представителя заявителя: {{RES1_item.adres_Applicant }}</p>
-    <p>Аккредитованная организация, проводившая исследования: {{ RES1_item.Accredited_organization }}</p>
-    <p>Номер аттестата аккредитации: {{ RES1_item.Accreditation_number }}</p>
-    <p>Наименование проекта: {{ RES1_item.Name_obj }}</p>
-    <p>Наименование проектировщика: {{ RES1_item.designer  }}</p>
-    <p>Юридический адрес проектировщика: {{ RES1_item.adr  }}</p>
-    <p>Номер экспертного заключения: {{ RES1_item.conclusion_number  }}</p>
-    <p>Номер аттестата аккредитации экспертной организации: {{ RES1_item.accreditation }}</p>
-    <p>Кем выдано экспертное заключение: {{ RES1_item.name_acr }}</p>
-    <p>Юридический адрес экспертной организации: {{ RES1_item.adr1 }}</p>
-    <p>Номер санитарно-эпидемиологического заключения: {{ RES1_item.SEZ1 }}</p>
-    <p>Кем выдано: {{ RES1_item.SEZ2 }}</p>
+
+<table border="1" width="100%" cellpadding="10">
+<tbody>
+<tr>
+<th align="center">Наименование строк</th>
+<th align="center" >Сведения </th>
+</tr>
+<tr>
+<td>Номер заявления</td>
+<td>{{ RES1_item.namber }}</td>
+</tr>
+<tr>
+<td>Дата регистрации заявления</td>
+<td>{{ RES1_item.date_creation }}</td>
+</tr>
+<tr>
+<td>Дата окзаания услуги</td>
+<td>{{ RES1_item.date_rendering }}</td>
+</tr>
+<tr>
+<td>Фактический адрес объекта</td>
+<td>{{ RES1_item.fact_adr }}</td>
+</tr>
+<tr>
+<td>Фактический адрес объекта</td>
+<td>{{ RES1_item.fact_adr }}</td>
+</tr>
+<tr>
+<td>Тип заявления</td>
+<td>{{RES1_item.Type_application }}</td>
+</tr>
+</tr>
+<tr>
+<td>Класс объекта</td>
+<td>{{ RES1_item.cl }}</td>
+</tr>
+<tr>
+<td>Тип объекта</td>
+<td>{{ RES1_item.Object  }}</td>
+</tr>
+<tr>
+<td>Наименование заявителя, представителя заявителя</td>
+<td>{{ RES1_item.Applicant  }}</td>
+</tr>
+<tr>
+<td>Юридический адрес заявителя, представителя заявителя</td>
+<td>{{RES1_item.adres_Applicant }}</td>
+</tr>
+<tr>
+<td>Аккредитованная организация, проводившая исследования</td>
+<td>{{ RES1_item.Accredited_organization }} </td>
+</tr>
+<tr>
+<td>Номер аттестата аккредитации</td>
+<td>{{ RES1_item.Accreditation_number }} </td>
+</tr>
+<tr>
+<td>Наименование проекта</td>
+<td>{{ RES1_item.Name_obj }} </td>
+</tr>
+<tr>
+<td>Наименование проектировщика</td>
+<td> {{ RES1_item.designer  }} </td>
+</tr>
+<tr>
+<td>Юридический адрес проектировщика</td>
+<td> {{ RES1_item.adr  }} </td>
+</tr>
+<tr>
+<td>Номер экспертного заключения</td>
+<td> {{ RES1_item.conclusion_number  }} </td>
+</tr>
+<tr>
+<td>Кем выдано экспертное заключение</td>
+<td> {{ RES1_item.name_acr }} </td>
+</tr>
+<tr>
+<td>Кем выдано экспертное заключение</td>
+<td> {{ RES1_item.name_acr }} </td>
+</tr>
+<tr>
+<td>Юридический адрес экспертной организации</td>
+<td> {{ RES1_item.adr1 }} </td>
+</tr>
+<tr>
+<td>Номер санитарно-эпидемиологического заключения</td>
+<td> {{ RES1_item.SEZ1 }} </td>
+</tr>
+<tr>
+<td>Кем выдано </td>
+<td> {{ RES1_item.SEZ2 }} </td>
+</tr>
+</tbody>
+</table>
 
 
     <form method="post" action="{% url 'add_basket_2' RES1_item.pk %}">
