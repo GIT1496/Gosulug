@@ -12,7 +12,7 @@ from .forms import SEZCreateForm,LICCreateForm, RESHCreateForm
 
 
 
-def order_create(request):
+def add_SEZ(request):
     basket = Basket(request)
     if request.method == 'POST':
         form = SEZCreateForm(request.POST)
@@ -25,15 +25,15 @@ def order_create(request):
             # очистка корзины
             basket.clear()
             # # order_create.delay(SEZ.id)
-            return render(request, 'orders/order/created.html',
+            return render(request, 'orders/order/created_SEZ.html',
                           {'SEZ': SEZ })
     else:
         form = SEZCreateForm
 
-    return render(request, 'orders/order/create.html',
+    return render(request, 'orders/order/create_SEZ.html',
                   {'basket': basket, 'form': form})
 
-def order_create2(request):
+def add_LIC(request):
     basket = Basket(request)
     if request.method == 'POST':
         form = LICCreateForm(request.POST)
@@ -46,15 +46,15 @@ def order_create2(request):
             # очистка корзины
             basket.clear()
             # # order_create.delay(SEZ.id)
-            return render(request, 'orders/order/created1.html',
+            return render(request, 'orders/order/create_LIC.html',
                           {'LIC': LIC })
     else:
         form = LICCreateForm
 
-    return render(request, 'orders/order/created1.html',
+    return render(request, 'orders/order/create_LIC.html',
                   {'basket': basket, 'form': form})
 
-def order_create3(request):
+def add_RESH(request):
     basket = Basket_resh(request)
     if request.method == 'POST':
         form = RESHCreateForm(request.POST, request.FILES)
@@ -67,18 +67,18 @@ def order_create3(request):
             # очистка корзины
             basket.clear()
             # # order_create.delay(SEZ.id)
-            return render(request, 'orders/order/created2.html',
+            return render(request, 'orders/order/created_RESH.html',
                           {'resh': resh})
     else:
         form = RESHCreateForm
 
-    return render(request, 'orders/order/create1.html',
+    return render(request, 'orders/order/create_RESH.html',
                   {'basket': basket, 'form': form})
 
 
 class SANZListView(ListView, Default_value):  # Возврат листа объектов
     model = SEZItem # определение таблицы для взаимодействия
-    template_name = 'orders/order/order_All1.html'  # путь шаблона (<Имя приложения>/<Имя модели>_list.html)
+    template_name = 'orders/order/SEZ-list.html'  # путь шаблона (<Имя приложения>/<Имя модели>_list.html)
     context_object_name = 'RESHi'  # Отправка данных по заданному ключу (object_list)
     queryset = SEZItem.objects.filter(product__Vip=True, SEZ__vidano="Управление Роспотребнадзора по Архангельской области")
     extra_context = {'title': 'Список санитарно-эпидемиологических заключений'}  # Доп. значения (статичные данные)
@@ -94,7 +94,7 @@ class SANZListView(ListView, Default_value):  # Возврат листа объ
 
 class RESHListView(ListView, Default_value):  # Возврат листа объектов
     model = RESHItem # определение таблицы для взаимодействия
-    template_name = 'orders/order/order-All2.html'  # путь шаблона (<Имя приложения>/<Имя модели>_list.html)
+    template_name = 'orders/order/RESH-list.html'  # путь шаблона (<Имя приложения>/<Имя модели>_list.html)
     context_object_name = 'RESHItem'  # Отправка данных по заданному ключу (object_list)
     # queryset = SEZItem.objects.filter(sajav__Vip=True, SEZ__vidano="Управление Роспотребнадзора по Архангельской области")
     extra_context = {'title': 'Список выданных решений'}  # Доп. значения (статичные данные)

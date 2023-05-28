@@ -1,7 +1,7 @@
 <html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
 
 {% block title %}
-    Внесение лицензии
+    Внесение СЭЗ
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
 
                     {% for field in form %}
 
-                        {% if field.name != ' date_creation' %}
+                        {% if field.namber != 'date_creation' %}
                             <div class="form-floating mb-4">
 
                                 {{ field }}
@@ -44,3 +44,12 @@
     </div>
 {% endblock %}
 </body></html>
+
+
+
+
+
+
+
+
+

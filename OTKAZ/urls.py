@@ -4,7 +4,7 @@ from OTKAZ.views import *
 
 
 urlpatterns = [
-    path('create1/', views.order_create1, name='order_create1'),
-    path('create2/', views.order_create_resh, name='order_create_resh'),
+    path('create1/', views.add_OTKAZ_SEZ, name='add_OTKAZ_SEZ'),
+    path('create2/', views.add_OTKAZ_RESH, name='add_OTKAZ_RESH'),
     path('OTKAZ/view/All/', OTKAZListView.as_view(), name='otkaz_SANZ_view'),
 ]

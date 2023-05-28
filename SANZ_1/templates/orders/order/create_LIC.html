@@ -1,7 +1,7 @@
 <html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
 
 {% block title %}
-    Регистрация заявления
+    Внесение лицензию
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
 
                     {% for field in form %}
 
-                        {% if field.name != 'date_of_brith' %}
+                        {% if field.namber != 'date_creation' %}
                             <div class="form-floating mb-4">
 
                                 {{ field }}
@@ -34,7 +34,7 @@
                         {% endif %}
                     {% endfor %}
                     <br><br>
-                    <input class="btn btn-success" type="submit" value="Отказать в оказании государственной услуги">
+                    <input class="btn btn-success" type="submit" value="Оказать государственную услугу">
 
                 </form>
 

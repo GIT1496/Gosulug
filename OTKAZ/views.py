@@ -13,7 +13,7 @@ from .util import Default_value
 
 
 
-def order_create1(request):
+def add_OTKAZ_SEZ(request):
     basket = Basket(request)
     if request.method == 'POST':
         form = OTKCreateForm(request.POST)
@@ -33,10 +33,10 @@ def order_create1(request):
     else:
         form = OTKCreateForm
 
-    return render(request, 'orders1/order1/create1.html',
+    return render(request, 'orders1/order1/create_OTKAZ.html',
                   {'basket': basket, 'form': form})
 
-def order_create_resh(request):
+def add_OTKAZ_RESH(request):
     basket = Basket_resh(request)
     if request.method == 'POST':
         form = OTKCreateForm(request.POST)
@@ -54,7 +54,7 @@ def order_create_resh(request):
     else:
         form = OTKCreateForm
 
-    return render(request, 'orders1/order1/create1.html',
+    return render(request, 'orders1/order1/create_OTKAZ.html',
                   {'basket': basket, 'form': form})
 
 
