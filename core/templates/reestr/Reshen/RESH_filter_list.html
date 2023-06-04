@@ -1,0 +1,27 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+{% block content %}
+{% block search %}
+    <p>Список невыполненных заявлений:</p>
+    <a href="{% url 'RESH_filter' pk=1 %}"><button>Неделя</button></a>
+    <a href="{% url 'RESH_filter' pk=2 %}"><button>Месяц</button></a>
+    <a href="{% url 'RESH_filter' pk=3 %}"><button>Все</button></a>
+{% endblock search %}
+                <div class="card" style="width: 80rem;">
+
+    {% for new in list1 %}
+
+
+                    <div class="align-content-sm-around">
+                        <p>Номер заявления: {{ new.namber }}</p>
+                        <p>Дата регистрации: {{ new.date_creation }}</p>
+                        <p>Предполагаемая дата оказания государственной услуги: {{ new.date_rendering }}</p>
+                        <p>Заявитель: {{ new.Applicant }}</p>
+                        <p>Класс опасности: {{ new.cl }}</p>
+                        <p>Тип заявления: {{ new.Type_application  }}</p>
+                        <p>Номер санитарно-эпидемиологического заключения: {{ new.SEZ1  }}</p>
+                        <a href="{% url 'one_Resh' new.pk %} " class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+{% endblock content %}

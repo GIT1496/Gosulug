@@ -60,7 +60,7 @@ def add_OTKAZ_RESH(request):
 
 class OTKAZListView(ListView, Default_value):  # Возврат листа объектов
     model = OTKItem # определение таблицы для взаимодействия
-    template_name = 'orders1/order1/order_All.html'  # путь шаблона (<Имя приложения>/<Имя модели>_list.html)
+    template_name = 'orders1/order1/Otkaz_ALL.html'  # путь шаблона (<Имя приложения>/<Имя модели>_list.html)
     context_object_name = 'OTKItem'  # Отправка данных по заданному ключу (object_list)
     queryset = OTKItem.objects.filter(product1__Vip=True, otk__vidano="Управление Роспотребнадзора по Архангельской области")
     extra_context = {'title': 'Список отказов'}  # Доп. значения (статичные данные)

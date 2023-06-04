@@ -16,7 +16,7 @@
         <h1> Список отказов в выдаче СЭЗ,лицензий, свидетельство о государственной регистрации </h1>
            {{ info }}<br>
     <form action="{% url 'search_results1' %}" method="get">
-  <input name="q" type="text" placeholder="Введите номер письма">
+  <input name="q" type="text" placeholder="Введите номер, заявителя">
     <input type="submit" value="Поиск заявления">
 </form>
 {#        {% if perms.Boormag.add_Aythor %}#}
@@ -33,7 +33,7 @@
                         <p>Регистрационный номер письма отказа: {{ item.otk.Nomer1 }}</p>
                         <p>Дата отказа: {{ item.otk.date_creation }}</p>
                         <p>Причина отказа: {{ item.otk.prich }}</p>
-                        <p>Заявитель: {{ item.product1.predpr }}</p>
+                        <p>Заявитель, представитель заявителя: {{ item.product1.predpr }} </p>
                         <p>Вид деятельности: {{ item.product1.vid }}</p>
                         <p>Наименование деятельности: {{ item.product1.dejat }}</p>
                         <p>Фактический адрес осуществления деятельности: {{ item.product1.fact_adr }}</p>

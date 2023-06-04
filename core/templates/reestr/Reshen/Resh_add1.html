@@ -1,0 +1,234 @@
+
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+
+{% load widget_tweaks %}
+{% block content %}
+
+    <div class="container text-center">
+        <div class="row align-items-center">
+            <div class="col">
+                <form method="post">
+                        {% csrf_token %}
+
+    <div class="form-floating mb-4">
+
+     {% render_field form.namber type="text" class="form-control"  placeholder="Номер заявления" %}
+<label for="frmProjectInterconnect">Номер заявления</label>
+</div>
+
+        <div class="form-floating mb-4">
+
+  {% render_field form.date_creation type="date" class="form-control"  placeholder="Дата регистрации заявления" %}
+            <label for="frmProjectInterconnect">Дата регистрации заявления</label>
+</div>
+
+                    <div class="form-floating mb-4">
+
+  {% render_field form.date_rendering type="date" class="form-control"  placeholder="Предполагаемая дата оказания государственной услуги" %}
+            <label for="frmProjectInterconnect">Предполагаемая дата оказания государственной услуги</label>
+</div>
+
+
+                    <div class="form-floating mb-4">
+                     {{ form.fact_adr }}
+<label for="frmProjectInterconnect">Фактический адрес осуществления деятельности</label>
+        <script>
+$(function() {
+    $("#id_fact_adr").autocomplete({
+        source: "{% url 'FC_autocomplete' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+                                        <div class="text-lg-start">
+
+                        Класс опасности объекта:   {{ form.cl }}
+             <label class="form-control-plaintext" for="{{ form.id_for_label }}">{{ form.label }}</label>
+</div>
+
+
+                                        <div class="text-lg-start">
+
+                        Тип заявления:   {{ form.Type_application  }}
+             <label class="form-control-plaintext" for="{{ form.id_for_label }}">{{ form.label }}</label>
+</div>
+
+                                                            <div class="text-lg-start">
+
+                        Тип объекта:   {{ form.Object  }}
+             <label class="form-control-plaintext" for="{{ form.id_for_label }}">{{ form.label }}</label>
+</div>
+
+                                        <div class="form-floating mb-4">
+                     {{ form.Applicant }}
+<label for="frmProjectInterconnect">Наименование заявителя, представителя заявителя</label>
+        <script>
+$(function() {
+    $("#id_Applicant").autocomplete({
+        source: "{% url 'APRE_autocomplete' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+                                                            <div class="form-floating mb-4">
+                     {{ form.adres_Applicant }}
+<label for="frmProjectInterconnect">Юридический адрес заявителя, представителя заявителя</label>
+        <script>
+$(function() {
+    $("#id_adres_Applicant").autocomplete({
+        source: "{% url 'ADRAPautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+                                                                                <div class="form-floating mb-4">
+                     {{ form.Accredited_organization }}
+<label for="frmProjectInterconnect">Аккредитованная организация, проводившая исследования</label>
+        <script>
+$(function() {
+    $("#id_Accredited_organization").autocomplete({
+        source: "{% url 'ACRautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+                                                                                                    <div class="form-floating mb-4">
+                     {{ form.Accreditation_number  }}
+<label for="frmProjectInterconnect">Номер аттестата аккредитации</label>
+        <script>
+$(function() {
+    $("#id_Accreditation_number").autocomplete({
+        source: "{% url 'NACRautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+                    <div class="form-floating mb-4">
+                     {{ form.Name_obj  }}
+<label for="frmProjectInterconnect">Наименование проекта</label>
+         </div>
+
+                    <div class="form-floating mb-4">
+                     {{ form.designer  }}
+<label for="frmProjectInterconnect">Наименование проектировщика</label>
+        <script>
+$(function() {
+    $("#id_designer").autocomplete({
+        source: "{% url 'DEJautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+                                        <div class="form-floating mb-4">
+                     {{ form.adr  }}
+<label for="frmProjectInterconnect">Юридический адрес проектировщика</label>
+        <script>
+$(function() {
+    $("#id_adr").autocomplete({
+        source: "{% url 'ADRDESautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+                    <div class="form-floating mb-4">
+                     {{ form.conclusion_number }}
+<label for="frmProjectInterconnect">Номер экспертного заключения</label>
+         </div>
+                                                            <div class="form-floating mb-4">
+                     {{ form.adr  }}
+<label for="frmProjectInterconnect">Юридический адрес проектировщика</label>
+        <script>
+$(function() {
+    $("#id_adr").autocomplete({
+        source: "{% url 'ADRDESautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+                                                                                <div class="form-floating mb-4">
+                     {{ form.accreditation  }}
+<label for="frmProjectInterconnect">Номер аттестата аккредитации экспертной организации</label>
+        <script>
+$(function() {
+    $("#id_accreditation").autocomplete({
+        source: "{% url 'ACCRESDautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+                                                                                                    <div class="form-floating mb-4">
+                     {{ form.name_acr  }}
+<label for="frmProjectInterconnect">Кем выдано экспертное заключение</label>
+        <script>
+$(function() {
+    $("#id_name_acr").autocomplete({
+        source: "{% url 'NAMEautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+                                                                                                                        <div class="form-floating mb-4">
+                     {{ form.adr1  }}
+<label for="frmProjectInterconnect">Юридический адрес экспертной организации</label>
+        <script>
+$(function() {
+    $("#id_adr1").autocomplete({
+        source: "{% url 'ADR1autocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
+         </div>
+
+
+                                        <div class="form-floating mb-4">
+                     {{ form.SEZ1 }}
+<label for="frmProjectInterconnect">Номер СЭЗ</label>
+         </div>
+
+                                                            <div class="text-lg-start">
+
+                        Кем выдано СЭЗ:   {{ form.SEZ2 }}
+             <label class="form-control-plaintext" for="{{ form.id_for_label }}">{{ form.label }}</label>
+</div>
+
+                                        <br><br>
+        <input class="btn btn-success" type="submit" value="Зарегистрировать заявление">
+                </form>
+                                    <a class="btn btn-info" href="{% url 'list_RESH_view' %}">Назад</a>
+
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+</body></html>

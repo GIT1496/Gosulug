@@ -15,7 +15,15 @@
         <h1> Список санитарно-эпидемиологических заключений </h1>
            {{ info }}<br>
         <form action="{% url 'search_results' %}" method="get">
-  <input name="q" type="text" placeholder="Введите номер">
+  <input name="q" type="text" placeholder="Номер заявления">
+    <input type="submit" value="Поиск">
+            <br></form>
+                <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Предприятие">
+    <input type="submit" value="Поиск">
+                            <br></form>
+                                <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Номер СЭЗ">
     <input type="submit" value="Поиск">
 {#        {% if perms.Boormag.add_Aythor %}#}
 {#    <a href="{% url 'add_author_view' %}" class="btn  btn-outline-primary">Добавить автора</a><br>#}
@@ -28,6 +36,7 @@
 
 
                     <div class="card-body">
+                        <p>Номер заявления: <a href="{% url 'one_SEZ' item.product.pk %}">{{ item.product.namber }} </a></p>
                         <p>Номер санитарно-эпидемиологического заключения: {{ item.SEZ.Nomer }}</p>
                         <p>Типографский номер бланка: {{ item.SEZ.tipogr }}</p>
                         <p>Заявитель: {{ item.product.predpr }}</p>

@@ -3,19 +3,72 @@
 {% block content %}
 <h1>Результат поиска</h1>
 
-<ul>
 {% if object_list %}
   {% for item in object_list %}
- <div>
-     <li>Номер СЭЗ:  {{ item.SEZ.Nomer }},
-      </li><li>  Заявитель: {{ item.product.predpr }}, Дата оказания услуги:  {{ item.SEZ.date_creation}}, Вид деятельности:  {{ item.product.vid }}, Наименование деятельности: {{ item.product.dejat }}, Адрес осуществления деятельности:  {{ item.product.fact_adr }}, Юридический адрес:  {{ item.product.adres_Applicant }}
- </li></div>
+
+
+<table border="1" width="100%" cellpadding="10">
+<tbody>
+<tr>
+<th align="center"> </th>
+<th align="center" >  </th>
+</tr>
+<tr>
+<td>Номер заявления</td>
+    <td> <a href="{% url 'one_SEZ' item.product.pk %}">{{ item.product.namber }} </a>
+    </td>
+</tr>
+
+<tr>
+<td>Номер СЭЗ</td>
+<td>{{ item.SEZ.Nomer }},</td>
+</tr>
+<tr>
+<td>Заявитель</td>
+<td>{{ item.product.predpr }}</td>
+</tr>
+<tr>
+<td>Дата оказаания услуги</td>
+<td>{{ item.SEZ.date_creation}}</td>
+</tr>
+<tr>
+<td>Вид деятельности</td>
+<td>{{ item.product.vid }}</td>
+</tr>
+<tr>
+<td>Наименование деятельности</td>
+<td>{{ item.product.dejat }}</td>
+</tr>
+<tr>
+<td>Адрес осуществления деятельности</td>
+<td>{{ item.product.fact_adr }}</td>
+</tr>
+<tr>
+<td>Юридический адрес</td>
+<td>{{ item.product.adres_Applicant }}</td>
+</tr>
+</tbody>
+
+</table>
 
      {% endfor %}
- {% else %}
+
+
+{% else %}
+    <ul>
 <p>Не найдено ниодного СЭЗ <br>Попробуйте повторить запрос с другой формулировкой</p>
 {% endif %}
-</ul>
+
 
 {% endblock %}
 </body></html>
+
+
+
+
+
+
+
+
+
+

@@ -15,6 +15,9 @@
   <input name="q" type="text" placeholder="Введите номер заявления">
     <input type="submit" value="Поиск заявления">
 </form>
+    <a href="{% url 'SEZ_filter_list'  %}" class="btn btn-info">Фильтр заявлений</a><br>
+
+
     <div>
         <h1>Список заявлений на санитарно-эпидемиологические заключения</h1>
            {{ info }}<br>

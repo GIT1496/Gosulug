@@ -17,14 +17,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from django.conf import settings
 from django.conf.urls.static import static
+from controlcenter.views import controlcenter
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
     path('core/', include("core.urls")),
     path('basket/', include('basket.urls')),
     path('orders/', include('SANZ_1.urls')),
-    path('orders1/', include('OTKAZ.urls'))
+    path('orders1/', include('OTKAZ.urls')),
+    path('dashboard/', include('dashboardgosusl.urls')),
+    path('admin/admin/dashboards/', controlcenter.urls),
+
 ]
 
 if settings.DEBUG:

@@ -28,7 +28,7 @@
       </tr></tbody><tbody>
             <tr>
                         <th scope="row">
-                                        <a href="{{ product_obj.get_absolute_url }}">{{ product_obj.namber }}
+                            {{ product_obj.namber }}
                             </a>
                         </th>
                         <td> {{ product_obj.date_creation }} </td>
@@ -51,6 +51,8 @@
             <a href="{% url 'list_SEZ_view' %}" class="btn btn-info">Выбрать еще одно заявление</a>
             <a href="{% url 'add_SEZ'  %}" class="btn btn-success"> Внести СЭЗ </a>
             <a href="{% url 'add_LIC'  %}" class="btn btn-success"> Внести лицензию </a>
+            <a href="{% url 'add_SVID'  %}" class="btn btn-success"> Внести Свидетельство о государственной регистрации </a>
+            <a href="{% url 'add_PEREOF'  %}" class="btn btn-success"> Переоформить документ </a>
             <a href="{% url 'add_OTKAZ_SEZ'  %}" class="btn btn-danger"> Внести отказ </a>
             <a href="{% url 'clear_basket_prod' %}" class="btn btn-danger">Очистить</a>
         </div>

@@ -11,7 +11,11 @@
 
 
 {% block content %}
-
+        <form action="{% url 'search_results3' %}" method="get">
+  <input name="q" type="text" placeholder="Номер заявления">
+    <input type="submit" value="Поиск">
+            <br></form>
+    <a href="{% url 'RESH_filter_list'  %}" class="btn btn-info">Фильтр заявлений</a><br>
     <div>
         <h1>Список заявлений на Решения об установлении санитарно-защитной зоны</h1>
            {{ info }}<br>

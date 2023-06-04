@@ -27,12 +27,13 @@ class SEZform(forms.ModelForm):
             ),
             'date_creation': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
             'date_rendering': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
-            'predpr': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Заявитель',
-                }
-            ),
+            # 'predpr': forms.TextInput(
+            #     attrs={
+            #         'class': 'form-control',
+            #         'placeholder': 'Заявитель',
+            #         'autocomplete': 'off',
+            #     }
+            # ),
             'dejat': forms.TextInput(
                 attrs={
                     'class': 'form-control',
@@ -65,6 +66,8 @@ class SEZform(forms.ModelForm):
             ),
 
         }
+        predpr = forms.ModelChoiceField(queryset=Reestr_1.objects.all(),
+                                      widget=forms.TextInput(attrs={'autocomplete': 'off', 'placeholder': 'Заявитель'}))
 
     def clean_name(self):
         name = self.cleaned_data['namber']

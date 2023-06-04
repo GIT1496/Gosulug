@@ -8,7 +8,7 @@ from basket.basket import Basket, Basket_resh
 from django.views.generic import TemplateView, ListView
 from django.db.models import Q
 from .util import Default_value
-from .forms import SEZCreateForm,LICCreateForm, RESHCreateForm
+from .forms import SEZCreateForm,LICCreateForm, RESHCreateForm, SVIDCreateForm, PEREOFCreateForm
 
 
 
@@ -20,7 +20,8 @@ def add_SEZ(request):
             SEZ = form.save()
             for item in basket:
                 SEZItem.objects.create(SEZ=SEZ,
-                                       product=item['SEZ'])
+                                       product=item['SEZ'],
+                                       status='Услуга оказана')
                 Reestr_1.objects.filter(namber=item['SEZ']).update(Vip=True)
             # очистка корзины
             basket.clear()
@@ -41,7 +42,8 @@ def add_LIC(request):
             LIC = form.save()
             for item in basket:
                 SEZItem.objects.create(LIC=LIC,
-                                       product=item['SEZ'])
+                                       product=item['SEZ'],
+                                       status='Услуга оказана')
                 Reestr_1.objects.filter(namber=item['SEZ']).update(Vip=True)
             # очистка корзины
             basket.clear()
@@ -54,6 +56,30 @@ def add_LIC(request):
     return render(request, 'orders/order/create_LIC.html',
                   {'basket': basket, 'form': form})
 
+
+def add_SVID(request):
+    basket = Basket(request)
+    if request.method == 'POST':
+        form = SVIDCreateForm(request.POST)
+        if form.is_valid():
+            SV = form.save()
+            for item in basket:
+                SEZItem.objects.create(SV=SV,
+                                       product=item['SEZ'],
+                                       status='Услуга оказана')
+                Reestr_1.objects.filter(namber=item['SEZ']).update(Vip=True)
+            # очистка корзины
+            basket.clear()
+            # # order_create.delay(SEZ.id)
+            return render(request, 'orders/order/created_SVID.html',
+                          {'SV': SV })
+    else:
+        form = SVIDCreateForm
+
+    return render(request, 'orders/order/Create_SVID.html',
+                  {'basket': basket, 'form': form})
+
+
 def add_RESH(request):
     basket = Basket_resh(request)
     if request.method == 'POST':
@@ -62,7 +88,8 @@ def add_RESH(request):
             resh = form.save()
             for item in basket:
                 RESHItem.objects.create(resh=resh,
-                                       sajav=item['RES1'])
+                                       sajav=item['RES1'],
+                                        status='Услуга оказана')
                 Reestr_2.objects.filter(namber=item['RES1']).update(Vip=True)
             # очистка корзины
             basket.clear()
@@ -74,6 +101,29 @@ def add_RESH(request):
 
     return render(request, 'orders/order/create_RESH.html',
                   {'basket': basket, 'form': form})
+
+def add_PEREOF(request):
+    basket = Basket(request)
+    if request.method == 'POST':
+        form = PEREOFCreateForm(request.POST)
+        if form.is_valid():
+            PER = form.save()
+            for item in basket:
+                SEZItem.objects.create(PER=PER,
+                                       product=item['SEZ'],
+                                       status='Услуга оказана')
+                Reestr_1.objects.filter(namber=item['SEZ']).update(Vip=True)
+            # очистка корзины
+            basket.clear()
+            # # order_create.delay(SEZ.id)
+            return render(request, 'orders/order/created_PERE.html',
+                          {'PER': PER })
+    else:
+        form = PEREOFCreateForm
+
+    return render(request, 'orders/order/Create_PERE.html',
+                  {'basket': basket, 'form': form})
+
 
 
 class SANZListView(ListView, Default_value):  # Возврат листа объектов

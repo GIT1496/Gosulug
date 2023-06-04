@@ -28,18 +28,24 @@ def func2():
 
 
 class Reestr_1(models.Model):
-    namber = models.CharField(max_length=15, null=False, default=func, verbose_name='Номер заявления')
-    date_creation = models.DateTimeField(null=False, verbose_name='Дата регистрации заявления')
-    date_rendering = models.DateField(null=False, verbose_name='Дата оказания государственной услуги')
-    predpr = models.CharField(max_length=200, blank=False, verbose_name='Предприятие')
-    vid = models.CharField(max_length=50, blank=False, default='Проект', verbose_name='Вид деятельности',
-                          choices=[
+    SPOSOB_NAPR = [('ПГУ', 'ПГУ'),
+                   ('Нарочным', 'Нарочным'),
+                   ('Почта', 'Почта')]
+    VID = [
                               ('Проект', 'Проект'),
                               ('Производство', 'Производство'),
                               ('Лицензия', 'Лицензия'),
                               ('Санитарно-защитная зона', 'Санитарно-защитная зона'),
                               ('Свидетельство о государственной регистрации', 'Свидетельство о государственной регистрации'),
                           ]
+
+
+    namber = models.CharField(max_length=15, null=False, default=func, verbose_name='Номер заявления')
+    date_creation = models.DateTimeField(null=False, verbose_name='Дата регистрации заявления')
+    date_rendering = models.DateField(null=False, verbose_name='Дата оказания государственной услуги')
+    predpr = models.CharField(max_length=200, blank=False, verbose_name='Предприятие')
+    vid = models.CharField(max_length=50, blank=False, default='Проект', verbose_name='Вид деятельности',
+                          choices=VID
                           )
 
     dejat= models.CharField(max_length=200, null=False, verbose_name='Наименование деятельности')
@@ -57,11 +63,7 @@ class Reestr_1(models.Model):
                             ]
                             )
     sp = models.CharField(max_length=200, null=False, verbose_name='Способ направления документов', default="ПГУ",
-                          choices=[
-                                ('ПГУ', 'ПГУ'),
-                                ('Нарочным', 'Нарочным'),
-                                ('Почта', 'Почта'),
-                            ])
+                          choices=SPOSOB_NAPR)
 
     Vip = models.BooleanField(null=True, verbose_name='Выполнено', default=False)
     Prim = models.CharField(max_length=200, blank=True, verbose_name='Примечание')
@@ -87,27 +89,29 @@ class Reestr_1(models.Model):
 
 
 class Reestr_2(models.Model):
-    namber = models.CharField(max_length=15, null=False, default=func2, verbose_name='Номер заявления')
-    date_creation = models.DateTimeField(null=False, verbose_name='Дата регистрации заявления')
-    date_rendering = models.DateTimeField(null=False, verbose_name='Дата оказания государственной услуги')
-    fact_adr = models.CharField(max_length=200, blank=False, verbose_name='Фактический адрес объекта')
-    cl = models.CharField(null=False,max_length=2,verbose_name='Класс опасности',
-                              choices=[
+    TYP = [
+                                  ('Установление санитарно-защитной зоны', 'Установление санитарно-защитной зоны'),
+                                  ('Изменение санитарно-защитной зоны', 'Изменение санитарно-защитной зоны'),
+                                  ('Сокращение санитарно-защитной зоны', 'Сокращение санитарно-защитной зоны'),
+                              ]
+    KL = [
                                   ('1', '1'),
                                   ('2', '2'),
                                   ('3', '3'),
                                   ('4', '4'),
                                   ('5', '5'),
                               ]
+    namber = models.CharField(max_length=15, null=False, default=func2, verbose_name='Номер заявления')
+    date_creation = models.DateTimeField(null=False, verbose_name='Дата регистрации заявления')
+    date_rendering = models.DateTimeField(null=False, verbose_name='Дата оказания государственной услуги')
+    fact_adr = models.CharField(max_length=200, blank=False, verbose_name='Фактический адрес объекта')
+    cl = models.CharField(null=False,max_length=2,verbose_name='Класс опасности', default='5',
+                              choices=KL
                               )
-    Type_application = models.CharField(max_length=100, null=False, verbose_name='Тип заявления',
-                              choices=[
-                                  ('Установление санитарно-защитной зоны', 'Установление санитарно-защитной зоны'),
-                                  ('Изменение санитарно-защитной зоны', 'Изменение санитарно-защитной зоны'),
-                                  ('Сокращение санитарно-защитной зоны', 'Сокращение санитарно-защитной зоны'),
-                              ]
+    Type_application = models.CharField(max_length=100, null=False, verbose_name='Тип заявления', default='Установление санитарно-защитной зоны',
+                              choices=TYP
                               )
-    Object = models.CharField(max_length=50, null=False, verbose_name='Тип объекта',
+    Object = models.CharField(max_length=50, null=False, verbose_name='Тип объекта', default='Действующий',
                               choices=[
                                   ('Действующий', 'Действующий'),
                                   ('Проектируемый', 'Проектируемый'),
@@ -126,14 +130,15 @@ class Reestr_2(models.Model):
     name_acr = models.CharField(max_length=200, null=False, verbose_name='Кем выдано экспертное заключение')
     adr1 = models.CharField(max_length=200, null=False, verbose_name='Юридический адрес экспертной организации')
     SEZ1 = models.CharField(max_length=27, blank=True, verbose_name='Номер санитарно-эпидемиологического заключения')
-    SEZ2 = models.CharField(null=False,max_length=40, verbose_name='Кем выдано',
+    SEZ2 = models.CharField(null=False,max_length=40, verbose_name='Кем выдано', default='Роспотребнадзор',
                               choices=[
                                   ('Роспотребнадзор', 'Роспотребнадзор'),
                                   ('Иная организация', 'Иная организация'),
                               ]
                               )
     Vip = models.BooleanField(null=True, blank=True, verbose_name='Выполнено', default=False)
-
+    def get_absolute_url(self):  # тэг url для объекта (Данный метод для вывода странички одной записи)
+        return reverse('one_SEZ', kwargs={'SEZ': self.pk, 'namber': self.namber})
     def __str__(self):
         return self.namber
 
@@ -162,3 +167,4 @@ class Reestr2Summary(Reestr_2):
 
 
 # Create your models here.
+

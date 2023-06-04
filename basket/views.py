@@ -93,4 +93,7 @@ def basket_clear_resh(request):
     basket = Basket(request)
     basket.clear()
     return redirect('list_RESH_view')
+
+
+
 # Create your views here.

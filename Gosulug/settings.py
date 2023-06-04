@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    'widget_tweaks',
     "basket",
+    'dashboardgosusl',
+    'controlcenter',
     # 'SANZ',
     'SANZ_1',
     "OTKAZ",
@@ -47,6 +50,11 @@ INSTALLED_APPS = [
     'rangefilter',
     'multiselectfield',
 ]
+
+CONTROLCENTER_DASHBOARDS = (
+    ('admindash', 'Gosulug.dashboards.MyDashboard'),
+
+),
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -172,14 +180,8 @@ EMAIL_HOST_PASSWORD = 'Qf8HJKFy2BnxYXQXiML9'  # Пароль для внешне
 EMAIL_USE_TLS_TLS = False  # Протокол шифрования TLS
 EMAIL_USE_SSL = True
 
-
-
-
-
-
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    # ]
 }
 

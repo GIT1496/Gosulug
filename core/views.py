@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Reestr_1, Reestr_2
 from OTKAZ.models import OTKItem
-# from .forms import BookForm, AuthorForm
 from .util import Default_value
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
@@ -16,6 +15,7 @@ from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
+
 
 from django.contrib import messages
 
@@ -114,14 +114,15 @@ def SEZ_detail(request, SEZ):
 class SEZCreateView(CreateView):
     model = Reestr_1
     form_class = SEZform   # Определение формы для взаимодействия
-    template_name = 'reestr/SEZ/SEZ_add.html'
+    template_name = 'reestr/SEZ/SEZ-add1.html'
     context_object_name = 'form'  # Переопределение ключа формы (object)
     success_url = reverse_lazy('list_SEZ_view')
 
-    # Права доступа
+
     @method_decorator(permission_required('core.add_Reestr_1'))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
 
 
 class SEZUpdateView(UpdateView):
@@ -130,6 +131,7 @@ class SEZUpdateView(UpdateView):
     template_name = 'reestr/SEZ/SEZ-edit.html'
     context_object_name = 'form'
     success_url = reverse_lazy('list_SEZ_view')
+
 
 
 class ReshenieView(ListView):
@@ -153,9 +155,9 @@ class ReshenieView(ListView):
 class RESHCreateView(CreateView):
     model = Reestr_2
     form_class = Reshform  # Определение формы для взаимодействия
-    template_name = 'reestr/Reshen/Resh_add.html'
+    template_name = 'reestr/Reshen/Resh_add1.html'
     context_object_name = 'form'  # Переопределение ключа формы (object)
-    success_url = reverse_lazy('list_SEZ_view')
+    success_url = reverse_lazy('list_RESH_view')
 
 class RESHUpdateView(UpdateView):
     model = Reestr_2
@@ -309,28 +311,7 @@ def error_500(request, exception):
     response.status_code = 500
     return response
 
-class SearchResultsView(ListView):
-    model = SEZItem
-    template_name = 'reestr/search/search_results.html'
 
-    def get_queryset(self):  # новый
-        query = self.request.GET.get('q')
-        object_list = SEZItem.objects.filter(
-             Q(SEZ__Nomer__icontains=query) | Q(product__namber__icontains=query) | Q(product__predpr__icontains=query)
-        )
-        return object_list
-
-
-class SearchResultsView1(ListView):
-    model = OTKItem
-    template_name = 'reestr/search/search_results1.html'
-
-    def get_queryset(self):  # новый
-        query = self.request.GET.get('q')
-        object_list = OTKItem.objects.filter(
-             Q(otk__Nomer1__icontains=query) | Q(product1__predpr__icontains=query)
-        )
-        return object_list
 # API заявлений
 @api_view(['GET', 'POST'])
 def reestr_api_list(request, format=None):
@@ -348,7 +329,7 @@ def reestr_api_list(request, format=None):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def reestr_api_detail(request, pk, format=None):
-    reestr_obj = get_object_or_404(Reestr_1, pk=pk)
+    reestr_obj = get_object_or_404(Reestr_1)
 
 
     if request.method == 'GET':

@@ -2,18 +2,23 @@
     <ul class="nav nav-pills">
 
         <li class="nav-item"><a href="{% url 'index_library' %}" class="nav-link active" aria-current="page">Домашняя страница</a></li>
-          </ul>
-        <div class="dropdown">
+<div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    Списки выданных документов
+    Дашборды
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item"  href="{% url 'list_SANZ_view' %}" >Список санитарно-эпидемиологических заключений</a></li>
-    <li><a class="dropdown-item"  href="{% url 'list_SANZ_RESH_view' %}" >Список выданных решений</a></li>
-    <li><a class="dropdown-item" href="{% url 'otkaz_SANZ_view' %}" > Список отказов на СЭЗ </a></li>
-    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+
+          <li><a class="dropdown-item"  href="{% url 'dashboard_with_pivot' %}" >Flexmonster</a></li>
+          <li><a class="dropdown-item"  href="{% url 'display' %}" >Панель мониторинга деятельность</a></li>
+          <li><a class="dropdown-item"  href="{% url 'display2' %}" >Панель мониторинга СЗЗ</a></li>
+          <li><a class="dropdown-item"  href="{% url 'display2' %}" >Панель мониторинга выданных документов</a></li>
   </ul>
 </div>
+    </ul>
+
+
+{#        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link active" aria-current="page">Тест</a></li>#}
+
 
         <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,7 +31,16 @@
             {% if perms.Gosulug.add_Reestr_1 %}
         <a href="{% url 'list_RESH_view' %}" class="dropdown-item" >Список заявлений на Решение об установлении санитарно-защитной зоны</a>
        {% endif %}
-    <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li>
+  </ul>
+</div>
+            <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    Списки выданных документов
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item"  href="{% url 'list_SANZ_view' %}" >Список санитарно-эпидемиологических заключений</a></li>
+    <li><a class="dropdown-item"  href="{% url 'list_SANZ_RESH_view' %}" >Список выданных решений</a></li>
+    <li><a class="dropdown-item" href="{% url 'otkaz_SANZ_view' %}" > Список отказов на деятельность </a></li>
   </ul>
 </div>
 {#        <li class="navbar-brand"><a href="{% url 'home' %}" class="btn btn-outline-primary">Поиск СЭЗ</a></li>#}

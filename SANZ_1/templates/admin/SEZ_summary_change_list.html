@@ -3,48 +3,7 @@
     <h1> Количество выданных СЭЗ </h1>
 {% endblock %}
 {% block result_list %}
-<div class="results">
-    <table>
-    <thead>
-      <tr>
-        <th>
-          <div class="text">
-            <a href="#">Типографский номер бланка</a>
-          </div>
-        </th>
-        <th>
-          <div class="text">
-            <a href="#">Номер СЭЗ</a>
-          </div>
-        </th>
-        <th>
-          <div class="text">
-            <a href="#">id</a>
-          </div>
-        </th>
-        <th>
-          <div class="text">
-            <a href="#">
-    <tbody>
-      {% for row in summary %}
-      <tr class="{% cycle 'row1' 'row2' %}">
-        <td> {{ row.tipogr }} </td>
-        <td> {{ row.Nomer }} </td>
-        <td> {{ row.id  }} </td>
-        <td>
-        </td>
-      </tr>
-      {% endfor %}
-        <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
-            <td> {{ summary_total.TIP }} </td>
-            <td> {{ summary_total.NAMBER }} </td>
-            <td> {{ summary_total.ID }} </td>
-  </tr>
-      </tbody>
-  </table>
-</div>
-
-        <h2> Количество выданных СЭЗ </h2>
+    <h2> Количество выданных СЭЗ </h2>
 <style>
 .bar-chart {
   height: 160px;
@@ -114,6 +73,48 @@
     {% endfor %}
     </div>
 </div>
+<div class="results">
+    <table>
+    <thead>
+      <tr>
+        <th>
+          <div class="text">
+            <a href="#">Типографский номер бланка</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">Номер СЭЗ</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">id</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">
+    <tbody>
+      {% for row in summary %}
+      <tr class="{% cycle 'row1' 'row2' %}">
+        <td> {{ row.tipogr }} </td>
+        <td> {{ row.Nomer }} </td>
+        <td> {{ row.id  }} </td>
+        <td>
+        </td>
+      </tr>
+      {% endfor %}
+        <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
+            <td> {{ summary_total.TIP }} </td>
+            <td> {{ summary_total.NAMBER }} </td>
+            <td> {{ summary_total.ID }} </td>
+  </tr>
+      </tbody>
+  </table>
+</div>
+
+
 {#{% endtimezone %}#}
 {% endblock %}
 {% block pagination %}{% endblock %}

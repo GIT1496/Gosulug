@@ -9,10 +9,12 @@ from django.db.models import Sum
 from datetime import datetime
 from rangefilter.filters import DateRangeFilterBuilder, DateTimeRangeFilterBuilder, NumericRangeFilterBuilder
 
+
 from django.db.models import DateTimeField
 from django.db.models import Min
 from django.db.models import Max
 from django.db.models.functions import Trunc
+
 
 
 @admin.register(Reestr1Summary)
@@ -86,7 +88,7 @@ class Reestr1SummaryAdmin(admin.ModelAdmin):
             ),
         ),
         ("date_rendering", NumericRangeFilterBuilder()),
-    'sp')
+    'sp', 'dejat')
 
     def get_next_in_date_hierarchy(request, date_hierarchy):
             if date_hierarchy + '__day' in request.GET:
@@ -97,11 +99,13 @@ class Reestr1SummaryAdmin(admin.ModelAdmin):
                 return 'week'
             return 'month'
 
+list_per_page = 5
 
 @admin.register(Reestr2Summary)
 class Reestr2SummaryAdmin(admin.ModelAdmin):
     change_list_template = 'admin/reestr2_summary_change_list.html'
     date_hierarchy = 'date_creation'
+
 
     def changelist_view(self, request, extra_context=None):
 
@@ -171,6 +175,7 @@ class Reestr2SummaryAdmin(admin.ModelAdmin):
         ("date_rendering", NumericRangeFilterBuilder()),
     'cl')
 
+
     def get_next_in_date_hierarchy(request, date_hierarchy):
             if date_hierarchy + '__day' in request.GET:
                 return 'hour'
@@ -179,6 +184,7 @@ class Reestr2SummaryAdmin(admin.ModelAdmin):
             if date_hierarchy + '__year' in request.GET:
                 return 'week'
             return 'month'
+
 
 
 
@@ -195,14 +201,25 @@ class Reestr_2Admin(admin.ModelAdmin):
     list_display = ('id', 'namber', 'date_creation', 'date_rendering','fact_adr','cl')  # Отображение полей
     list_display_links = ('namber', 'date_creation')  # Установка ссылок на атрибуты
     search_fields = ('namber', 'cl')  # Поиск по полям
-    list_filter = ['namber', "date_rendering"]
+    list_filter = (
+        ("date_creation", DateRangeFilterBuilder()),
+        (
+            "date_creation",
+            DateTimeRangeFilterBuilder(
+                title="Дата оказания услуги",
+                default_start=datetime(2020, 1, 1),
+                default_end=datetime(2030, 1, 1),
+            ),
+        ),
+        ("date_creation", NumericRangeFilterBuilder()),
+    )
 
     inlines = [OTKItemInline]
 
 admin.site.register(Reestr_2, Reestr_2Admin)
 
 class Reestr_1Admin(admin.ModelAdmin):
-    list_display = ('id','namber', 'date_creation', 'date_rendering','predpr','vid')  # Отображение полей
+    list_display = ('id','namber', 'date_creation', 'date_rendering','predpr','vid','dejat')  # Отображение полей
     list_display_links = ('namber', 'date_creation')  # Установка ссылок на атрибуты
     search_fields = ('namber', 'vid')  # Поиск по полям
     list_filter = (

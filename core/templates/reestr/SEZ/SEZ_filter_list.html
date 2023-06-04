@@ -1,0 +1,30 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+{% block content %}
+{% block search %}
+    <p>Список невыполненных заявлений:</p>
+    <a href="{% url 'SEZ_filter' pk=1 %}"><button>Неделя</button></a>
+    <a href="{% url 'SEZ_filter' pk=2 %}"><button>Месяц</button></a>
+    <a href="{% url 'SEZ_filter' pk=3 %}"><button>Все</button></a>
+{% endblock search %}
+
+    {% for new in news %}
+         <div class="card" style="width: 80rem;">
+
+
+
+                    <div class="align-content-sm-around">
+                        <p>Номер заявления: {{ new.namber }}</p>
+                        <p>Дата регистрации: {{ new.date_creation }}</p>
+                        <p>Предполагаемая дата оказания государственной услуги: {{ new.date_rendering }}</p>
+                        <p>Заявитель: {{ new.predpr }}</p>
+                        <p>Вид деятельности: {{ new.vid  }}</p>
+                        <p>Наименование деятельности: {{ new.dejat  }}</p>
+{#                        <p>Номер санитарно-эпидемиологического заключения: {{ item.Nomer  }}</p>#}
+                        <a href="{% url 'one_SEZ' new.pk %} " class="btn btn-primary">Подробнее</a>
+                    </div>
+                </div>
+
+                {% endfor %}
+
+
+{% endblock content %}

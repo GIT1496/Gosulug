@@ -11,6 +11,16 @@
 
 
 {% block content %}
+        <div>
+        <h1> Список решений на выдачу санитарно-эпидемиологических заключений </h1>
+           {{ info }}<br>
+        <form action="{% url 'search_results2' %}" method="get">
+  <input name="q" type="text" placeholder="Номер решения">
+    <input type="submit" value="Поиск">
+            <br></form>
+                <form action="{% url 'search_results2' %}" method="get">
+  <input name="q" type="text" placeholder="Предприятие">
+    <input type="submit" value="Поиск">
 
 {#        {% if perms.Boormag.add_Aythor %}#}
 {#    <a href="{% url 'add_author_view' %}" class="btn  btn-outline-primary">Добавить автора</a><br>#}
@@ -23,6 +33,7 @@
 
 
                     <div class="card-body">
+                        <p>Номер заявления: <a href="{% url 'one_Resh' item.sajav.pk %}">{{ item.sajav.namber }}</a></p>
                         <p>Номер решения: {{ item.resh.namber }}</p>
                         <p>Дата решения: {{ item.resh.date_creation }}</p>
                         <p>Заявитель, представитель заявителя: {{ item.sajav.Applicant }}</p>
