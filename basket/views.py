@@ -6,29 +6,7 @@ from .basket import Basket_resh
 from .forms import BasketAddProductForm
 from django.views.decorators.http import require_POST
 
-@require_POST
-def basket_add_1(request, product_id):
-        if product_id == Basket(request):
-            basket = Basket(request)
-            product_obj = get_object_or_404(Reestr_1, pk=product_id)
-            form = BasketAddProductForm(request.POST)
-            print(product_id)
-            if form.is_valid():
-                basket.add(product=product_obj,
-                       count_product=form.cleaned_data['count_prod'],
-                       update_count=form.cleaned_data['update'])
-                return redirect('list_basket_prod')
-        elif product_id == Basket_resh(request):
-            basket = Basket_resh(request)
-            product_obj = get_object_or_404(Reestr_2, pk=product_id)
-            form = BasketAddProductForm(request.POST)
-            print(product_id)
-            if form.is_valid():
-                basket.add(product=product_obj,
-                      count_product=form.cleaned_data['count_prod'],
-                      update_count=form.cleaned_data['update'])
-                return redirect('list_basket_resh')
-
+"""Работа с внесенными заявления внутри сессии"""
 @require_POST
 def basket_add(request, product_id):
     basket = Basket(request)
@@ -89,7 +67,7 @@ def basket_clear(request):
     basket.clear()
     return redirect('list_SEZ_view')
 
-def basket_clear_resh(request):
+def с(request):
     basket = Basket(request)
     basket.clear()
     return redirect('list_RESH_view')

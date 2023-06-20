@@ -1,0 +1,11 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>Ошибка 404. Страница не найдена</h1>
+
+    <a class="btn btn-info" href="{% url 'list_SEZ_view' %}">Реестр заявлений</a>
+{% endblock %}</body></html>

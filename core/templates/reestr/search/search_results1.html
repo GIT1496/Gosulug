@@ -2,16 +2,14 @@
 
 {% block content %}
 <h1>Результат поиска</h1>
-
 <ul>
-{% if object_list %}
+     {% if object_list %}
   {% for item in object_list %}
- <div>
-     <li>Номер отказа:  {{ item.otk.Nomer1 }},
-      </li><li>  Заявитель: {{ item.product1.predpr }}, Дата оказания услуги:  {{ item.otk.date_creation}}, Вид деятельности:  {{ item.product1.vid }}, Наименование деятельности: {{ item.product1.dejat }}, Адрес осуществления деятельности:  {{ item.product1.fact_adr }}, Юридический адрес:  {{ item.product1.adres_Applicant }}
-      </li><li>
- </li></div>
-
+      <div>
+     <li>Номер отказа:  {{ item.otk.Nomer1 }}, Номер заявления: {{ item.product1.namber }}, Причина отказа: {{ item.otk.prich }}
+      </li> Заявитель: {{ item.product1.predpr }}, Дата отказа:  {{ item.otk.date_creation}}, Адрес осуществления деятельности:  {{ item.product1.fact_adr }}
+ </div>
+<br>
      {% endfor %}
  {% else %}
 <p>Не найдено ниодного отказа <br>Попробуйте повторить запрос с другой формулировкой</p>

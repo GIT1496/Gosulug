@@ -11,18 +11,20 @@
     <p>Заявитель: {{SEZ1_item.predpr }}</p>
     <p>Юридический адрес заявителя, представителя заявителя: {{SEZ1_item.adres_Applicant }}</p>
     <p>Вид деятельности: {{ SEZ1_item.vid  }}</p>
-    <p>Наименование деятельности: {{ SEZ1_item.dejat }}</p>
+    <p>Наименование деятельности/Причина переоформления: {{ SEZ1_item.dejat }}</p>
     <p>Адрес осуществления деятельности: {{ SEZ1_item.fact_adr }}</p>
     <p>Отдел исполнитель: {{ SEZ1_item.Otd  }}</p>
     <p>Способ направления документов: {{ SEZ1_item.sp }}</p>
     <p>Примечание: {{ SEZ1_item.Prim }}</p>
 
-
+{% if perms.core.add_reestr_1 %}
     <form method="post" action="{% url 'add_basket_1' SEZ1_item.pk %}">
     {% csrf_token %}
     {{ form_basket }}
-    <input type="submit" class="btn-success" value="Оказать государственную услугу">
+    <input type="submit" class="btn-success" value="Внести решение по заявлению">
     </form>
+    {% endif %}
+
     <a href="{% url 'list_SEZ_view' %}" class="btn btn-info">Назад</a><br>
 {% endblock %}
 

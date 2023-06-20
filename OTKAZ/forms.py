@@ -5,6 +5,7 @@ from .models import OTKItem
 import re
 from django.core.exceptions import ValidationError
 
+"""Форма для внесения данных в модель отказов"""
 
 class OTKCreateForm(forms.ModelForm):
     class Meta:

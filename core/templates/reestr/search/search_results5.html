@@ -1,0 +1,21 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block content %}
+<h1>Результат поиска</h1>
+<ul>
+     {% if object_list %}
+  {% for item in object_list %}
+      <div>
+     <li>Номер отказа:  {{ item.otk.Nomer1 }}, Номер заявления: {{ item.product2.namber }} , Причина отказа: {{ item.otk.prich }}
+      </li><br>  Заявитель: {{ item.product2.Applicant }}, Дата отказа:  {{ item.otk.date_creation}}, Наименование проекта: {{ item.product2.Name_obj }} Адрес осуществления деятельности:  {{ item.product2.fact_adr }}
+      <br><br>
+ </div>
+
+     {% endfor %}
+ {% else %}
+<p>Не найдено ниодного отказа <br>Попробуйте повторить запрос с другой формулировкой</p>
+{% endif %}
+</ul>
+
+{% endblock %}
+</body></html>

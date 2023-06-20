@@ -9,7 +9,9 @@
 
 <html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
 
-
+{% block title %}
+    Регистрация заявления
+{% endblock %}
 {% load widget_tweaks %}
 {% block content %}
 
@@ -65,7 +67,7 @@ $(function() {
                                               <div class="form-floating mb-4">
 
   {% render_field form.dejat class="form-control"  placeholder="Наименование деятельности" %}
-            <label for="frmProjectInterconnect">Наименование деятельности</label>
+            <label for="frmProjectInterconnect">Наименование деятельности/причина переоформления</label>
                                                                           <script>
 $(function() {
     $("#id_dejat").autocomplete({

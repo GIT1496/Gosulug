@@ -10,7 +10,7 @@ from .utils import (
     generate_color_palette,get_year_dict)
 
 
-
+"""Модуль для дашбордов по СЗЗ"""
 def display_charts2(request):
     return render(request, 'analys/charts2.html', {})
 

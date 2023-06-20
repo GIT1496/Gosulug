@@ -33,6 +33,15 @@ $(function() {
     });
 });
 </script>
+
+                                                                <script>
+$(function() {
+    $("#id_vidano").autocomplete({
+        source: "{% url 'OTKISPautocompView' %}",
+        minLength: 2,
+    });
+});
+</script>
                             </div>
 
                             {{ field.errors }}

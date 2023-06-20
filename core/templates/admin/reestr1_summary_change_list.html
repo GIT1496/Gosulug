@@ -58,9 +58,9 @@
 .bar-chart .bar:hover .bar-tooltip {
     opacity: 1;
 }
+
 </style>
 
-{#{% timezone 'UTC' %}#}
 <div class="results">
     <div class="bar-chart">
     {% for x in summary_over_time %}
@@ -83,38 +83,34 @@
           </div>
         </th>
         <th>
-{#          <div class="text">#}
-{#            <a href="#">Номер заявления</a>#}
-{#          </div>#}
-{#        </th>#}
-{#        <th>#}
-{#          <div class="text">#}
-{#            <a href="#">id</a>#}
-{#          </div>#}
-{#        </th>#}
-{#        <th>#}
-{#          <div class="text">#}
-{#            <a href="#">#}
-{#    <tbody>#}
+          <div class="text">
+            <a href="#">Номер заявления</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">id</a>
+          </div>
+        </th>
+        <th>
+          <div class="text">
+            <a href="#">
+    <tbody>
       {% for row in summary %}
-{#      <tr class="{% cycle 'row1' 'row2' %}">#}
-{#        <td> {{ row.vid }} </td>#}
-{#        <td> {{ row.namber }} </td>#}
-{#        <td> {{ row.id  }} </td>#}
-{#        <td>#}
-{#        </td>#}
-{#      </tr>#}
+      <tr class="{% cycle 'row1' 'row2' %}">
+        <td> {{ row.vid }} </td>
+        <td> {{ row.namber }} </td>
+        <td> {{ row.id  }} </td>
+        <td>
+        </td>
+      </tr>
       {% endfor %}
         <tr style="font-weight:bold; border-top:2px solid #DDDDDD;">
             <td> {{ summary_total.VID }} </td>
-{#            <td> {{ summary_total.NAMBER }} </td>#}
-{#            <td> {{ summary_total.ID }} </td>#}
-{#  </tr>#}
-{#      </tbody>#}
+
   </table>
 </div>
 
 
 {#{% endtimezone %}#}
 {% endblock %}
-{% block pagination %}{% endblock %}

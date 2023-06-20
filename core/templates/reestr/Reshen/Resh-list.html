@@ -12,7 +12,7 @@
 
 {% block content %}
         <form action="{% url 'search_results3' %}" method="get">
-  <input name="q" type="text" placeholder="Номер заявления">
+  <input name="q" type="text" size="50" placeholder="Номер заявления или Фактический адрес или Заяитель">
     <input type="submit" value="Поиск">
             <br></form>
     <a href="{% url 'RESH_filter_list'  %}" class="btn btn-info">Фильтр заявлений</a><br>

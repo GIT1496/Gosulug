@@ -1,17 +1,15 @@
 from django.shortcuts import render
-from django.shortcuts import render
-from .models import SEZ1, SEZItem, Reestr_1, Reestr_2,RESHItem
+from .models import SEZItem, Reestr_1, Reestr_2,RESHItem
 
 
 from basket.basket import Basket, Basket_resh
 
-from django.views.generic import TemplateView, ListView
-from django.db.models import Q
+from django.views.generic import ListView
 from .util import Default_value
 from .forms import SEZCreateForm,LICCreateForm, RESHCreateForm, SVIDCreateForm, PEREOFCreateForm
 
 
-
+"""Внесение выданных документов через сессию"""
 def add_SEZ(request):
     basket = Basket(request)
     if request.method == 'POST':
@@ -125,7 +123,7 @@ def add_PEREOF(request):
                   {'basket': basket, 'form': form})
 
 
-
+# Вывод реестра выданных лицензий, СЭЗ, свидетельств и т.д.
 class SANZListView(ListView, Default_value):  # Возврат листа объектов
     model = SEZItem # определение таблицы для взаимодействия
     template_name = 'orders/order/SEZ-list.html'  # путь шаблона (<Имя приложения>/<Имя модели>_list.html)
@@ -141,7 +139,7 @@ class SANZListView(ListView, Default_value):  # Возврат листа объ
 
     paginate_by = 5
 
-
+# Вывод реестра решений СЗЗ
 class RESHListView(ListView, Default_value):  # Возврат листа объектов
     model = RESHItem # определение таблицы для взаимодействия
     template_name = 'orders/order/RESH-list.html'  # путь шаблона (<Имя приложения>/<Имя модели>_list.html)

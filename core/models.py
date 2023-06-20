@@ -1,8 +1,8 @@
 from django.db import models
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 
 
-
+# Функция для автоматического формирования номера заявления через id, добавлена в default namber
 def func():
     nm = Reestr_1.objects.all()
     nm1 = 1
@@ -10,7 +10,7 @@ def func():
         if i1.id > nm1:
             nm1 = i1.id
     nm1 = nm1 + 1
-    nn = '29 - ' + str(nm1) + " - 2023"
+    nn = '29-' + str(nm1) + "-2023"
     return nn
 
 def func2():
@@ -20,13 +20,13 @@ def func2():
         if i1.id > nm1:
             nm1 = i1.id
     nm1 = nm1 + 1
-    nn = '29 - ' + str(nm1) + " - 2023"
+    nn = '29-' + str(nm1) + "-2023"
     return nn
 
 
 
 
-
+# Модель для хранения заявлений на СЭЗ, лицензии и т.д.
 class Reestr_1(models.Model):
     SPOSOB_NAPR = [('ПГУ', 'ПГУ'),
                    ('Нарочным', 'Нарочным'),
@@ -37,6 +37,9 @@ class Reestr_1(models.Model):
                               ('Лицензия', 'Лицензия'),
                               ('Санитарно-защитная зона', 'Санитарно-защитная зона'),
                               ('Свидетельство о государственной регистрации', 'Свидетельство о государственной регистрации'),
+                              ('Переформление лицензии', 'Переформление лицензии'),
+                              ('Переформление СЭЗ', 'Переформление СЭЗ'),
+                              ('Переформление Свидетельства', 'Переформление Свидетельства'),
                           ]
 
 
@@ -48,7 +51,7 @@ class Reestr_1(models.Model):
                           choices=VID
                           )
 
-    dejat= models.CharField(max_length=200, null=False, verbose_name='Наименование деятельности')
+    dejat= models.CharField(max_length=200, null=False, verbose_name='Наименование деятельности/Причина переоформления')
     fact_adr = models.CharField(max_length=200, null=False,
                                  verbose_name='Фактический адрес осуществления деятельности')
     adres_Applicant = models.CharField(max_length=200, null=False,
@@ -76,18 +79,8 @@ class Reestr_1(models.Model):
         verbose_name_plural = 'заявления на получение санитарно-эпидемиологического заключения, лицензии, свидетельства о государственной регистрации продукции'  # Надпись во множественном числе
         ordering = ['namber']  # Сортировка полей (по возрастанию)
 
-# class SezItem(models.Model):
-#     order = models.ForeignKey(Reestr_1, verbose_name='Заказ', related_name='items', blank=True, on_delete=models.SET_NULL)
-#     SEZ = models.CharField(max_length=150, verbose_name='Номер санитарно-эпидемиологического заключения', related_name='order_items', blank=True, on_delete=models.SET_NULL)
-#     status = models.CharField(max_length=150, null=True, verbose_name='Статус',
-#                               choices=[
-#                                   ('Услуга оказана', 'Услуга оказана'),
-#                               ]
-#                               )
-#     count_prod = models.PositiveIntegerField(verbose_name='Количество книг', default=1)
 
-
-
+# Модель для хранения Решений
 class Reestr_2(models.Model):
     TYP = [
                                   ('Установление санитарно-защитной зоны', 'Установление санитарно-защитной зоны'),
@@ -138,7 +131,7 @@ class Reestr_2(models.Model):
                               )
     Vip = models.BooleanField(null=True, blank=True, verbose_name='Выполнено', default=False)
     def get_absolute_url(self):  # тэг url для объекта (Данный метод для вывода странички одной записи)
-        return reverse('one_SEZ', kwargs={'SEZ': self.pk, 'namber': self.namber})
+        return reverse('PR_SEZ', kwargs={'SEZ2': self.pk, 'namber': self.namber})
     def __str__(self):
         return self.namber
 
@@ -153,10 +146,6 @@ class Reestr1Summary(Reestr_1):
         verbose_name = 'Количество заявлений на получение санитарно-эпидемиологического заключения, лицензии, свидетельства о государственной регистрации продукции'
         verbose_name_plural = 'Количество заявлений на получение санитарно-эпидемиологического заключения, лицензии, свидетельства о государственной регистрации продукции'
 
-class Namber(models.Model):
-    Nom = models.OneToOneField(Reestr_1, verbose_name='Номер 1', related_name='items', null=True, on_delete=models.SET_NULL)
-    Nom2 = models.OneToOneField(Reestr_2, verbose_name='Номер 2', related_name='items', null=True, on_delete=models.SET_NULL)
-# Create your models here.
 
 
 class Reestr2Summary(Reestr_2):

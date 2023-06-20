@@ -2,6 +2,8 @@ from decimal import Decimal
 from django.conf import settings
 from core.models import Reestr_1, Reestr_2
 
+"""Классы для работы с ID сессии и добавления выбранных элементов в сессию"""
+
 class Basket_resh(object):
     def __init__(self, request):
         self.session = request.session
@@ -20,14 +22,14 @@ class Basket_resh(object):
     def add(self, product, count_product=1, update_count=False):
         prod_pk = str(product.pk)
 
-        # Проверка наличия продукта в корзине (если нет в корзине, то добавляем)
+        # Проверка наличия в корзине (если нет в корзине, то добавляем)
         if prod_pk not in self.basket:
             self.basket[prod_pk] = {
                 'count_prod': 0,
                 'namber_prod': str(product.namber)
             }
 
-        # Обновление количества продукта в корзине
+        # Обновление количества в корзине
         if update_count:
             self.basket[prod_pk]['count_prod'] = count_product
         else:
@@ -39,18 +41,10 @@ class Basket_resh(object):
     def remove(self, product):
         prod_pk = str(product.pk)
 
-        # Если удаляемый товар лежит в корзине, то очищаем его ключ (и данные о нём)
+        # Если удаляемое заявление лежит в корзине, то очищаем его ключ (и данные о нём)
         if prod_pk in self.basket:
             del self.basket[prod_pk]
             self.save()
-
-    def get_total_full_price(self):
-        # sum_price = 0
-        # for item in self.basket.values():
-        #     sum_price += float(item['price_prod']) * int(item['count_prod'])
-        # return sum_price
-        # ==
-        return round(sum(float(item['price_prod']) * int(item['count_prod']) for item in self.basket.values()), 2)
 
     def clear(self):
 
@@ -101,14 +95,14 @@ class Basket(object):
     def add(self, product, count_product=1, update_count=False):
         prod_pk = str(product.pk)
 
-        # Проверка наличия продукта в корзине (если нет в корзине, то добавляем)
+        # Проверка наличия в корзине (если нет в корзине, то добавляем)
         if prod_pk not in self.basket:
             self.basket[prod_pk] = {
                 'count_prod': 0,
                 'namber_prod': str(product.namber)
             }
 
-        # Обновление количества продукта в корзине
+        # Обновление количества в корзине
         if update_count:
             self.basket[prod_pk]['count_prod'] = count_product
         else:
@@ -120,18 +114,11 @@ class Basket(object):
     def remove(self, product):
         prod_pk = str(product.pk)
 
-        # Если удаляемый товар лежит в корзине, то очищаем его ключ (и данные о нём)
+        # Если удаляемое заявление лежит в корзине, то очищаем его ключ (и данные о нём)
         if prod_pk in self.basket:
             del self.basket[prod_pk]
             self.save()
 
-    def get_total_full_price(self):
-        # sum_price = 0
-        # for item in self.basket.values():
-        #     sum_price += float(item['price_prod']) * int(item['count_prod'])
-        # return sum_price
-        # ==
-        return round(sum(float(item['price_prod']) * int(item['count_prod']) for item in self.basket.values()), 2)
 
     def clear(self):
 

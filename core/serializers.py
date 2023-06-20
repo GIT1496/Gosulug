@@ -2,7 +2,6 @@
 
 from rest_framework import serializers
 from .models import Reestr_1
-from SANZ_1.models import SEZ1
 
 
 class Reestr1Serializer(serializers.ModelSerializer):

@@ -1,15 +1,10 @@
 from django import forms
 from .models import Reestr_1, Reestr_2
-
-import re
-from django.core.exceptions import ValidationError
-from django.forms.fields import DateField
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.contrib.admin.widgets import AdminDateWidget
 
 
-
+"""Форма для ввода заявления на СЭЗ """
 
 class SEZform(forms.ModelForm):
     class Meta:
@@ -37,7 +32,7 @@ class SEZform(forms.ModelForm):
             'dejat': forms.TextInput(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Наименование деятельности',
+                    'placeholder': 'Наименование деятельности/Причина переоформления',
                 }
             ),
             'fact_adr': forms.TextInput(
@@ -69,13 +64,8 @@ class SEZform(forms.ModelForm):
         predpr = forms.ModelChoiceField(queryset=Reestr_1.objects.all(),
                                       widget=forms.TextInput(attrs={'autocomplete': 'off', 'placeholder': 'Заявитель'}))
 
-    def clean_name(self):
-        name = self.cleaned_data['namber']
-        if re.match(r'\d', name):
-            raise ValidationError('Поле не должно начинаться с буквы')
-        return name
 
-
+"""Форма для ввода заявления на Решение СЗЗ"""
 class Reshform(forms.ModelForm):
     class Meta:
         model = Reestr_2
@@ -203,53 +193,12 @@ class Reshform(forms.ModelForm):
 
     }
 
-
-class SezOkForm(forms.Form):
-    Nomer = forms.CharField(
-        max_length=50,
-        min_length=2,
-        strip=True,
-        label='Номер санитарно-эпидемиологического заключения')
-    tipogr = forms.CharField(
-        max_length=150,
-        min_length=2,
-        strip=True,
-        label='Типографский номер бланка',
-        initial="Типографский номер бланка",
-        widget=forms.Textarea)
-    vidano = forms.FloatField(
-        min_value=1,
-        # step_size=10,
-        label='Кем выдано',
-        initial=150)
-
-def clean_date(self):
-    name = self.cleaned_data['Nomer']
-    if re.match(r'\d', name):
-        raise forms.ValidationError('Поле не должно начинаться с буквы')
-    else:
-        return name
-
-# class SezOtkForm(forms.ModelForm):
-#     class Meta:
-#         model = Reestr_1
-#         # fields = '__all__' # Использование всех полей (не реком.)
-#         fields = ['Prichina', 'Vip']
-#         widgets = {
-#             'Prichina': forms.TextInput(
-#                 attrs={
-#                     'class': 'form-control',
-#                     'placeholder': 'Причина отказа',
-#                 }
-#             ),
-#             'Vip': forms.RadioSelect(),
-#         }
+# Форма для регистрации
 
 class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
         widgets = {
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
@@ -267,12 +216,7 @@ class LoginForm(AuthenticationForm):
             widget=forms.PasswordInput(attrs={'class': 'form-control'})
         )
 
-
-
-
-
-
-# email
+# email (форма для обратной связи)
 class ContactForm(forms.Form):
     recipient = forms.EmailField(
         label='Email',

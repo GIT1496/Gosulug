@@ -1,0 +1,58 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block content %}
+<h1>Результат поиска</h1>
+
+{% if object_list %}
+  {% for item in object_list %}
+
+<table border="1" width="100%" cellpadding="10">
+<tbody>
+<tr>
+<th align="center"> </th>
+<th align="center" >  </th>
+</tr>
+<tr>
+<td>Номер заявления</td>
+    <td> <a href="{% url 'one_SEZ' item.pk %}">{{ item.namber }} </a>
+    </td>
+</tr>
+
+<tr>
+<td>Номеp заявления</td>
+<td>{{ item.namber }},</td>
+</tr>
+<tr>
+<td> Заявитель, представитель заявителя </td>
+<td>{{ item.predpr }}</td>
+</tr>
+<tr>
+<td>Дата оказаания услуги</td>
+<td>{{ item.date_creation}}</td>
+</tr>
+<tr>
+<td>Тип заявления</td>
+<td>{{ item.date_rendering  }}</td>
+</tr>
+<tr>
+<td>Вид деятельности</td>
+<td>{{ item.vid }}</td>
+</tr>
+<tr>
+<td>Адрес осуществления деятельности</td>
+<td>{{ item.fact_adr }}</td>
+</tr>
+<tr>
+</table>
+
+     {% endfor %}
+
+
+{% else %}
+    <ul>
+<p>Не найдено ни одного заявления <br>Попробуйте повторить запрос с другой формулировкой</p>
+{% endif %}
+
+
+{% endblock %}
+</body></html>

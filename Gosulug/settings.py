@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+"""Настройки проекта"""
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +31,7 @@ ALLOWED_HOSTS = ['localhost',
                  '127.0.0.1']
 
 
-# Application definition
+# Установленны приложения в проекте
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -43,18 +45,16 @@ INSTALLED_APPS = [
     "basket",
     'dashboardgosusl',
     'controlcenter',
-    # 'SANZ',
+    "KMS_sotr",
     'SANZ_1',
     "OTKAZ",
+    'coverage',
     "rest_framework",
     'rangefilter',
     'multiselectfield',
 ]
 
-CONTROLCENTER_DASHBOARDS = (
-    ('admindash', 'Gosulug.dashboards.MyDashboard'),
 
-),
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -103,7 +103,7 @@ DATABASES = {
 }
 
 
-# Password validation
+# Настройка проверки пароля
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -140,6 +140,7 @@ USE_TZ = True
 import os
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR/'static')
+
 import os
 STATICFILES_DIRS = [
 os.path.join(BASE_DIR, 'core/static'),
@@ -150,12 +151,12 @@ os.path.join(BASE_DIR, 'SANZ_1/static'),
 
 
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+# Путь для медиаконтента
+
 import os
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Установка пути для медиа-контента
-MEDIA_URL = '/media/'  # URL-адрес для вывода картинок на сайте
+MEDIA_URL = '/media/'  # URL-адрес для контента
 
 
 # Default primary key field type
@@ -180,6 +181,8 @@ EMAIL_HOST_PASSWORD = 'Qf8HJKFy2BnxYXQXiML9'  # Пароль для внешне
 EMAIL_USE_TLS_TLS = False  # Протокол шифрования TLS
 EMAIL_USE_SSL = True
 
+
+# Настройки REST_FRAMEWORK
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
     # ]

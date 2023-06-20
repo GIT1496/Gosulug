@@ -1,0 +1,84 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ title }}
+
+{% endblock %}
+
+
+{% block content %}
+
+
+</form>
+    <div>
+        <h1> Реестр отказов в выдаче Решений на установление санитарно-защитных зон </h1>
+           {{ info }}<br>
+    <form action="{% url 'search_results5' %}" method="get">
+  <input name="q" type="text" size="100" placeholder="Введите номер отказа либо фактический адрес либо наименование проекта либо заявителя">
+    <input type="submit" value="Поиск заявления">
+</form>
+{#        {% if perms.Boormag.add_Aythor %}#}
+{#    <a href="{% url 'add_author_view' %}" class="btn  btn-outline-primary">Добавить автора</a><br>#}
+{#    {% endif %}#}
+            <div class="m-lg-4">
+            {% for item in object_list %}
+
+                <div class="card" style="width: 80rem;">
+
+
+
+                    <div class="card-body">
+                        <p>Регистрационный номер письма отказа: {{ item.otk.Nomer1 }}</p>
+                        <p>Номер заявления: <a href="{% url 'one_Resh' item.product2.pk %}">{{ item.product2.namber }} </a></p>
+                        <p>Дата отказа: {{ item.otk.date_creation }}</p>
+                        <p>Причина отказа: {{ item.otk.prich }}</p>
+                        <p>Заявитель, представитель заявителя: {{ item.product2.Applicant }} </p>
+                        <p>Класс опасности: {{ item.product2.cl }}</p>
+                        <p>Место осуществления деятельности: {{ item.product2.fact_adr }}</p>
+                        <p>Тип заявления: {{ item.product2.Type_application }}</p>
+                        <p>Санитарно-эпидемиологическое заключение: {{ item.product2.SEZ1 }}</p>
+                    </div>
+                    </div>
+{% endfor %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-lg justify-content-center">
+
+                {% if page_obj.has_previous %} {# Проверка наличии предыдущей страницы #}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            {# ^получения номера предыдущей страницы^ #}
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for p in page_obj.paginator.page_range %} {# Перечисление страниц из пагинатора #}
+                    {% if p == page_obj.number %} {# Проверка текущей страницы со списком страницы #}
+                        {# Отображение страницы на которой находится пользователь #}
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ p }}</a></li>
+                        {# Вывод всех остальных страниц #}
+                    {% elif p > page_obj.number|add:-3 and p > page_obj.number|add:3 %}
+                        {# p &gt; page_obj.number - 3 #} {# 8 &gt; 10 - 3 #}
+                        <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                {% if page_obj.has_next %} {# Проверка наличии следующей страницы #}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            {# ^получения номера следующей страницы^ #}
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+{% endblock %}
+
+</body></html>

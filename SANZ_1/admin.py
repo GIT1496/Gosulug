@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib import admin
 from .models import SEZ1, SEZItem, SEZSummary,LICSummary, SVIDSummary, LIC1, RESH1, RESHItem, SVID, Pereoformlen
-from .models import PereSummary
+
 from django.db.models import DateTimeField
 from django.db.models import Min
 from django.db.models import Max
@@ -10,6 +10,7 @@ from django.db.models.functions import Trunc
 from rangefilter.filters import DateRangeFilterBuilder, DateTimeRangeFilterBuilder, NumericRangeFilterBuilder
 from datetime import datetime
 
+"""Дашборды в панели администратора"""
 @admin.register(SEZSummary)
 class SEZSummaryAdmin(admin.ModelAdmin):
     change_list_template = 'admin/SEZ_summary_change_list.html'
@@ -44,27 +45,30 @@ class SEZSummaryAdmin(admin.ModelAdmin):
             qs.aggregate(**metrics)
         )
 
+        def get_next_in_date_creation(request, date_hierarchy):
+            if date_hierarchy + '__day' in request.GET:
+                return 'hour'
+            if date_hierarchy + '__month' in request.GET:
+                return 'day'
+            if date_hierarchy + '__year' in request.GET:
+                return 'week'
+            return 'month'
 
+        period = get_next_in_date_creation(request, self.date_hierarchy)
+        response.context_data['period'] = period
         summary_over_time = qs.annotate(
             period=Trunc(
                 'date_creation',
-                'day',
+                period,
                 output_field=DateTimeField(),
             ),
-
-
         ).values('period').annotate(total=Count('id')).order_by('period')
-        summary_range = summary_over_time.aggregate(
-            low=Min('total'),
-            high=Max('total'),
-        )
-        high = summary_range.get('high', 0)
-        low = summary_range.get('low', 0)
         response.context_data['summary_over_time'] = [{
             'period': x['period'],
             'total': x['total'] or 0,
             'pct': x['total']
         } for x in summary_over_time]
+
 
 
 
@@ -83,6 +87,7 @@ class SEZSummaryAdmin(admin.ModelAdmin):
         ),
         ("date_creation", NumericRangeFilterBuilder()),'deistv',
     )
+
 
 @admin.register(LICSummary)
 class LICSummaryAdmin(admin.ModelAdmin):
@@ -103,13 +108,13 @@ class LICSummaryAdmin(admin.ModelAdmin):
 
         metrics = {
             'NAMBER': Count('Nomer'),
-            'LIC': Count('licenz'),
-            'VID': Count('vid'),
+            'LIC': Count('vid'),
+            'VID': Count('id'),
         }
 
         response.context_data['summary'] = list(
             qs
-            .values('Nomer','licenz','vid')
+            .values('Nomer','vid','id')
             .annotate(**metrics)
             .order_by('-date_creation')
         )
@@ -118,27 +123,30 @@ class LICSummaryAdmin(admin.ModelAdmin):
             qs.aggregate(**metrics)
         )
 
+        def get_next_in_date_creation(request, date_hierarchy):
+            if date_hierarchy + '__day' in request.GET:
+                return 'hour'
+            if date_hierarchy + '__month' in request.GET:
+                return 'day'
+            if date_hierarchy + '__year' in request.GET:
+                return 'week'
+            return 'month'
 
+        period = get_next_in_date_creation(request, self.date_hierarchy)
+        response.context_data['period'] = period
         summary_over_time = qs.annotate(
             period=Trunc(
                 'date_creation',
-                'day',
+                period,
                 output_field=DateTimeField(),
             ),
-
-
         ).values('period').annotate(total=Count('id')).order_by('period')
-        summary_range = summary_over_time.aggregate(
-            low=Min('total'),
-            high=Max('total'),
-        )
-        high = summary_range.get('high', 0)
-        low = summary_range.get('low', 0)
         response.context_data['summary_over_time'] = [{
             'period': x['period'],
             'total': x['total'] or 0,
             'pct': x['total']
         } for x in summary_over_time]
+
 
 
 
@@ -159,8 +167,9 @@ class LICSummaryAdmin(admin.ModelAdmin):
     )
 
 
+
 @admin.register(SVIDSummary)
-class LICSummaryAdmin(admin.ModelAdmin):
+class SVIDSummaryAdmin(admin.ModelAdmin):
     change_list_template = 'admin/SVID_summary_change_list.html'
     date_hierarchy = 'date_creation'
 
@@ -194,26 +203,30 @@ class LICSummaryAdmin(admin.ModelAdmin):
         )
 
 
+        def get_next_in_date_creation(request, date_hierarchy):
+            if date_hierarchy + '__day' in request.GET:
+                return 'hour'
+            if date_hierarchy + '__month' in request.GET:
+                return 'day'
+            if date_hierarchy + '__year' in request.GET:
+                return 'week'
+            return 'month'
+
+        period = get_next_in_date_creation(request, self.date_hierarchy)
+        response.context_data['period'] = period
         summary_over_time = qs.annotate(
             period=Trunc(
                 'date_creation',
-                'day',
+                period,
                 output_field=DateTimeField(),
             ),
-
-
         ).values('period').annotate(total=Count('id')).order_by('period')
-        summary_range = summary_over_time.aggregate(
-            low=Min('total'),
-            high=Max('total'),
-        )
-        high = summary_range.get('high', 0)
-        low = summary_range.get('low', 0)
         response.context_data['summary_over_time'] = [{
             'period': x['period'],
             'total': x['total'] or 0,
             'pct': x['total']
         } for x in summary_over_time]
+
 
 
 
@@ -235,7 +248,7 @@ class LICSummaryAdmin(admin.ModelAdmin):
 
 
 
-
+"""Отображение моделей в панели администратора"""
 class SEZItemInline(admin.TabularInline):
     model = SEZItem
     raw_id_fields = ['product']
@@ -260,14 +273,13 @@ class SEZAdmin(admin.ModelAdmin):
                 default_end=datetime(2030, 1, 1),
             ),
         ),
-        ("date_creation", NumericRangeFilterBuilder()),
-    )
+        ("date_creation", NumericRangeFilterBuilder()), "deistv")
     inlines = [SEZItemInline]
 
 admin.site.register(SEZ1, SEZAdmin)
 class LICAdmin(admin.ModelAdmin):
-    list_display = ('id', 'Nomer', "licenz")
-    list_display_links = ('Nomer', "licenz")
+    list_display = ('date_creation', 'Nomer',)
+    list_display_links = ("date_creation", 'Nomer')
     list_filter = (
         ("date_creation", DateRangeFilterBuilder()),
         (
@@ -336,8 +348,3 @@ class RESHAdmin(admin.ModelAdmin):
 admin.site.register(RESH1,RESHAdmin)
 
 
-# Register your models here.
-# Register your models here.
-
-
-# Register your models here.

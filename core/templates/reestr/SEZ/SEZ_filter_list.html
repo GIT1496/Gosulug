@@ -1,7 +1,7 @@
 <html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
 {% block content %}
 {% block search %}
-    <p>Список невыполненных заявлений:</p>
+    <p>Список невыполненных заявлений, поступивших в следующие периоды:</p>
     <a href="{% url 'SEZ_filter' pk=1 %}"><button>Неделя</button></a>
     <a href="{% url 'SEZ_filter' pk=2 %}"><button>Месяц</button></a>
     <a href="{% url 'SEZ_filter' pk=3 %}"><button>Все</button></a>

@@ -1,0 +1,43 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% block content %}
+<h1>Результат поиска</h1>
+
+{% if object_list %}
+  {% for item in object_list %}
+
+<table border="1" width="100%" cellpadding="10">
+<tbody>
+<tr>
+<th align="center"> </th>
+<th align="center" >  </th>
+</tr>
+<tr>
+<td>Название документа</td>
+    <td> {{ item.title }} </td>
+</tr>
+<tr>
+<td>Дата оказаания услуги</td>
+<td>{{ item.date_creation}}</td>
+</tr>
+<tr>
+<td>Краткое описание</td>
+<td>{{ item.kr_op  }}</td>
+</tr>
+<tr>
+<td>Ссылка для скачивания документа:</td>
+<td><a href = "/media/{{ item.silk }}" download>{{ item.silk }}</a></td>
+</tr>
+</table>
+
+     {% endfor %}
+
+
+{% else %}
+    <ul>
+<p>Не найдено ни одного заявления <br>Попробуйте повторить запрос с другой формулировкой</p>
+{% endif %}
+
+
+{% endblock %}
+</body></html>

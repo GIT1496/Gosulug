@@ -24,30 +24,22 @@
 <td>{{ item.SEZ.Nomer }},</td>
 </tr>
 <tr>
+    <td>Номер Лицензии</td>
+<td>{{ item.LIC.Nomer }},</td>
+</tr>
+<tr>
+        <td>Номер Свидетельства о государственной регистрации продукции</td>
+<td>{{ item.SV.Nomer }},</td>
+</tr>
+<tr>
+        <td>Номер переоформленного документа</td>
+<td>{{ item.PER.nomer }},</td>
+</tr>
+<tr>
+<tr>
 <td>Заявитель</td>
 <td>{{ item.product.predpr }}</td>
 </tr>
-<tr>
-<td>Дата оказаания услуги</td>
-<td>{{ item.SEZ.date_creation}}</td>
-</tr>
-<tr>
-<td>Вид деятельности</td>
-<td>{{ item.product.vid }}</td>
-</tr>
-<tr>
-<td>Наименование деятельности</td>
-<td>{{ item.product.dejat }}</td>
-</tr>
-<tr>
-<td>Адрес осуществления деятельности</td>
-<td>{{ item.product.fact_adr }}</td>
-</tr>
-<tr>
-<td>Юридический адрес</td>
-<td>{{ item.product.adres_Applicant }}</td>
-</tr>
-</tbody>
 
 </table>
 
@@ -56,7 +48,7 @@
 
 {% else %}
     <ul>
-<p>Не найдено ниодного СЭЗ <br>Попробуйте повторить запрос с другой формулировкой</p>
+<p>Не найдено ни одного документа <br>Попробуйте повторить запрос с другой формулировкой</p>
 {% endif %}
 
 

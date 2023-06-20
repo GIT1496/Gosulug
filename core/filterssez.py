@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render
 from core.models import Reestr_1, Reestr_2
 from datetime import datetime, timedelta
+
+"""Модуль для фильтрации данных реестров добавленных документов по дате регистрации"""
 def Reestr1_list(request):
     """Вывод всех заявлений
     """

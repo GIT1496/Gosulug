@@ -20,7 +20,6 @@
                 <th scope="col">Предприятие</th>
                 <th scope="col">Вид деятельности</th>
                 <th scope="col">Наименование деятельности</th>
-                <th scope="col">Удаление</th>
             </tr>
   </thead>
   <tbody>
@@ -38,7 +37,6 @@
                         <td> {{ product_obj.dejat }} </td>
 
                 <td>
-{#                            <a href="{% url 'remove_basket_prod' product_obj.pk %}" class="btn btn-danger">Удалить</a>#}
                         </td>
                     </tr><tr>
             </tr>
@@ -51,7 +49,7 @@
             <a href="{% url 'list_SEZ_view' %}" class="btn btn-info">Выбрать еще одно заявление</a>
             <a href="{% url 'add_SEZ'  %}" class="btn btn-success"> Внести СЭЗ </a>
             <a href="{% url 'add_LIC'  %}" class="btn btn-success"> Внести лицензию </a>
-            <a href="{% url 'add_SVID'  %}" class="btn btn-success"> Внести Свидетельство о государственной регистрации </a>
+            <a href="{% url 'add_SVID'  %}" class="btn btn-success"> Внести свидетельство о государственной регистрации </a>
             <a href="{% url 'add_PEREOF'  %}" class="btn btn-success"> Переоформить документ </a>
             <a href="{% url 'add_OTKAZ_SEZ'  %}" class="btn btn-danger"> Внести отказ </a>
             <a href="{% url 'clear_basket_prod' %}" class="btn btn-danger">Очистить</a>

@@ -1,17 +1,12 @@
 from django.shortcuts import render
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
-from core.models import Reestr_1
-from  core.forms import SEZform
-from django.http import HttpResponse
 
 from django.views.generic import View
 from django.http import JsonResponse
-from django.core import serializers
 from core.models import Reestr_1, Reestr_2
 from OTKAZ.models import OTK
+from SANZ_1.models import SVID, Pereoformlen
 
+"""Модуль для автодополнения данных через JQueRy"""
 class MyModelAutocompleteView(View):
     def get(self, request, *args, **kwargs):
         term = request.GET.get('term')
@@ -221,40 +216,90 @@ class OTKautocompView(View):
             print(apl_json)
         return JsonResponse(results, safe=False)
 
+class OTKISPautocompView(View):
+    def get(self, request, *args, **kwargs):
+        term = request.GET.get('term')
+        vid = OTK.objects.filter(vidano__icontains=term)
+        results = []
+        for v in vid:
+            apl_json = {}
+            apl_json['id'] = v.id
+            apl_json['label'] = v.vidano
+            apl_json['value'] = v.vidano
+            results.append(apl_json)
+            print(apl_json)
+        return JsonResponse(results, safe=False)
+def predprauto(request):
+    languages = Reestr_1.objects.all()
+    return render(request,'reestr/SEZ/SEZ-list.html',{"languages":languages})
 
-# import json
-#
-# def get_places(request):
-#   if request.is_ajax():
-#     q = request.GET.get('term', '')
-#     places = Reestr_1.objects.filter(predpr__icontains=q)
-#     results = []
-#     for pl in places:
-#       place_json = {}
-#       place_json = pl.predpr
-#       results.append(place_json)
-#     data = json.dumps(results)
-#   else:
-#     data = 'fail'
-#   mimetype = 'application/json'
-#   return HttpResponse(data, mimetype)
+class SVOBLautocompView(View):
+    def get(self, request, *args, **kwargs):
+        term = request.GET.get('term')
+        ob1 = SVID.objects.filter(obl__icontains=term)
+        results = []
+        for obl in ob1:
+            apl_json = {}
+            apl_json['id'] = obl.id
+            apl_json['label'] = obl.obl
+            apl_json['value'] = obl.obl
+            results.append(apl_json)
+            print(apl_json)
+        return JsonResponse(results, safe=False)
+
+class SVVIDLautocompView(View):
+    def get(self, request, *args, **kwargs):
+        term = request.GET.get('term')
+        vi = SVID.objects.filter(Svid_vid__icontains=term)
+        results = []
+        for vid in vi:
+            apl_json = {}
+            apl_json['id'] = vid.id
+            apl_json['label'] = vid.Svid_vid
+            apl_json['value'] = vid.Svid_vid
+            results.append(apl_json)
+            print(apl_json)
+        return JsonResponse(results, safe=False)
 
 
+class SVFIRMLautocompView(View):
+    def get(self, request, *args, **kwargs):
+        term = request.GET.get('term')
+        fir = SVID.objects.filter(firm__icontains=term)
+        results = []
+        for f in fir:
+            apl_json = {}
+            apl_json['id'] = f.id
+            apl_json['label'] = f.firm
+            apl_json['value'] = f.firm
+            results.append(apl_json)
+            print(apl_json)
+        return JsonResponse(results, safe=False)
 
+class SVNORMautocompView(View):
+    def get(self, request, *args, **kwargs):
+        term = request.GET.get('term')
+        norm = SVID.objects.filter(Norm__icontains=term)
+        results = []
+        for n in norm:
+            apl_json = {}
+            apl_json['id'] = n.id
+            apl_json['label'] = n.Norm
+            apl_json['value'] = n.Norm
+            results.append(apl_json)
+            print(apl_json)
+        return JsonResponse(results, safe=False)
 
-
-
-
-
-
-
-
-
-
-# @csrf_exempt
-# @require_POST
-# def search(request):
-#     query = request.POST.get('query', '')
-#     results = Reestr_1.objects.filter(name__icontains=query)
-#     data = [{'id': r.id, 'predpr': r.predpr} for r in results]
-#     return JsonResponse({'data': data})
+class PerprautocompView(View):
+    def get(self, request, *args, **kwargs):
+        term = request.GET.get('term')
+        prich = Pereoformlen.objects.filter(prich__icontains=term)
+        results = []
+        for p in prich:
+            apl_json = {}
+            apl_json['id'] = p.id
+            apl_json['label'] = p.prich
+            apl_json['value'] = p.prich
+            results.append(apl_json)
+            print(apl_json)
+        return JsonResponse(results, safe=False)

@@ -2,13 +2,13 @@ from django.db import models
 from django.db import models
 from core.models import Reestr_1, Reestr_2
 
+"""Модели приложения"""
 class OTK(models.Model):
     Nomer1 = models.CharField(max_length=60, blank=True,
                              verbose_name='Номер письма', unique=True)
     date_creation = models.DateTimeField(null=True, verbose_name='Дата документа')
     prich = models.CharField(max_length=50, blank=False,verbose_name='Причина отказа')
-    vidano = models.CharField(max_length=150, blank=True, verbose_name='Кем выдано',
-                              )
+    vidano = models.CharField(max_length=150, blank=True, verbose_name='Исполнитель')
 
     class Meta:
         verbose_name = 'Отказы'
@@ -23,8 +23,8 @@ class OTKItem(models.Model):
     otk = models.ForeignKey(OTK, verbose_name='Номер письма', related_name='items', null=True, on_delete=models.SET_NULL)
     product1 = models.ForeignKey(Reestr_1, verbose_name='Заявление', related_name='order_items1', null=True, on_delete=models.SET_NULL)
     product2 = models.ForeignKey(Reestr_2,  verbose_name='Заявление2', related_name='order_items2', null=True, on_delete=models.SET_NULL)
-    status1 = models.CharField(max_length=150, null=True, verbose_name='Статус', default='Создан',
-                              choices=[
+    status1 = models.CharField(max_length=150, null=True, verbose_name='Статус', default='-',
+                              choices=[('-','-',),
                                   ('Отказ в оказании государственной услуги', 'Отказ в оказании государственной услуги'),
                               ]
                               )

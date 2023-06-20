@@ -1,0 +1,78 @@
+<html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    {{ title }}
+
+{% endblock %}
+
+
+
+
+{% block content %}
+            <form action="{% url 'search_results8' %}" method="get">
+  <input name="q" size="100" type="text" placeholder="Название документа или краткое описание">
+    <input type="submit" value="Поиск">
+        </form>
+        <div>
+
+            <div class="m-lg-4">
+            {% for item in object_list %}
+
+                <div class="card" style="width: 80rem;">
+
+
+
+                    <div class="card-body">
+                        <p>Название документа: {{ item.title }}
+                        <p>Дата документа: {{ item.date_creation }}</p>
+                        <p>Краткое описание: {{ item.kr_op }}</p>
+                        <p>Ссылка для скачивания: <a href = "/media/{{ item.silk }}" download>{{ item.silk }}</a></p>
+
+                    </div>
+                </div>
+
+                {% endfor %}
+        </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-lg justify-content-center">
+
+                {% if page_obj.has_previous %} {# Проверка наличии предыдущей страницы #}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                            {# ^получения номера предыдущей страницы^ #}
+                            <span aria-hidden="true">«</span>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for p in page_obj.paginator.page_range %} {# Перечисление страниц из пагинатора #}
+                    {% if p == page_obj.number %} {# Проверка текущей страницы со списком страницы #}
+                        {# Отображение страницы на которой находится пользователь #}
+                        <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ p }}</a></li>
+                        {# Вывод всех остальных страниц #}
+                    {% elif p > page_obj.number|add:-3 and p > page_obj.number|add:3 %}
+                        {# p &gt; page_obj.number - 3 #} {# 8 &gt; 10 - 3 #}
+                        <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+
+                    {% endif %}
+
+                {% endfor %}
+
+                {% if page_obj.has_next %} {# Проверка наличия следующей страницы #}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                            {# ^получения номера следующей страницы^ #}
+                            <span aria-hidden="true">»</span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+{% endblock %}
+
+</body></html>

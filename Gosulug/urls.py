@@ -14,24 +14,35 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
+
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from django.conf.urls.static import static
-from controlcenter.views import controlcenter
 from django.conf import settings
+from core.views import index_template
+from django.conf.urls import handler404
+from django.conf.urls import handler400
+from django.conf.urls import handler403
 
+# Пути в URL для приложений проекта
 urlpatterns = [
+    path('', index_template, name='index_gosuslug'),
     path('admin/', admin.site.urls),
-
     path('core/', include("core.urls")),
     path('basket/', include('basket.urls')),
     path('orders/', include('SANZ_1.urls')),
     path('orders1/', include('OTKAZ.urls')),
     path('dashboard/', include('dashboardgosusl.urls')),
-    path('admin/admin/dashboards/', controlcenter.urls),
+    path('KMS_sotr/', include('KMS_sotr.urls')),
 
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Представления для ошибок в проекте
+handler404 = "core.views.error_404"
+handler400 = "core.views.error_400"
+handler403 = "core.views.error_403"

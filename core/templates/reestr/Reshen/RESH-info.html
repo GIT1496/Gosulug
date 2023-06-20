@@ -99,16 +99,13 @@
 </tr>
 </tbody>
 </table>
-
-
+{% if perms.core.add_reestr_2 %}
     <form method="post" action="{% url 'add_basket_2' RES1_item.pk %}">
     {% csrf_token %}
     {{ form_basket }}
-    <input type="submit" class="btn-success" value="Оказать услугу">
+    <input type="submit" class="btn-success" value="Внести решение по заявлению">
     </form>
+    {% endif %}
     <a href="{% url 'list_RESH_view' %}" class="btn btn-info">Назад</a><br>
 {% endblock %}
-
-
-
 </body></html>

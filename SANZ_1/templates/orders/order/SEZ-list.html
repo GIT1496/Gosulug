@@ -1,3 +1,9 @@
+<link rel="stylesheet"
+    href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" ></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <html><head><style type="text/css" id="operaUserStyle"></style></head><body>{% extends 'base.html' %}
 
 {% load static %}
@@ -12,22 +18,55 @@
 
 {% block content %}
     <div>
-        <h1> Список санитарно-эпидемиологических заключений </h1>
+        <h1> Реестр выданных санитарно-эпидемиологических заключений </h1>
            {{ info }}<br>
+
         <form action="{% url 'search_results' %}" method="get">
   <input name="q" type="text" placeholder="Номер заявления">
     <input type="submit" value="Поиск">
             <br></form>
+    </div>
+<div>
                 <form action="{% url 'search_results' %}" method="get">
+
   <input name="q" type="text" placeholder="Предприятие">
-    <input type="submit" value="Поиск">
+
+                    <input type="submit" value="Поиск">
+
                             <br></form>
+    </div>
+    <div>
                                 <form action="{% url 'search_results' %}" method="get">
   <input name="q" type="text" placeholder="Номер СЭЗ">
     <input type="submit" value="Поиск">
-{#        {% if perms.Boormag.add_Aythor %}#}
-{#    <a href="{% url 'add_author_view' %}" class="btn  btn-outline-primary">Добавить автора</a><br>#}
-{#    {% endif %}#}
+                                </form>
+    </div>
+        <div>
+                                <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Номер Лицензии">
+    <input type="submit" value="Поиск">
+                                </form>
+    </div>
+            <div>
+                                <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Номер Свидетельства">
+    <input type="submit" value="Поиск">
+                                </form>
+    </div>
+                <div>
+                                <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Номер переоформленного документа">
+    <input type="submit" value="Поиск">
+                                </form>
+    </div>
+
+                    <div>
+                                <form action="{% url 'search_results' %}" method="get">
+  <input name="q" type="text" placeholder="Место осуществления деятельности">
+    <input type="submit" value="Поиск">
+                                </form>
+    </div>
+
             <div class="m-lg-4">
             {% for item in object_list %}
 

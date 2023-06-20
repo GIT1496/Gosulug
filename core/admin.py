@@ -1,22 +1,22 @@
 from django.contrib import admin
-from django.contrib import admin
 from .models import Reestr_2, Reestr_1
-from SANZ_1.models import SEZ1, SEZItem
+from SANZ_1.models import SEZItem
 from OTKAZ.models import OTKItem
+
+# Модули для анализа данных
 from .models import Reestr1Summary, Reestr2Summary
 from django.db.models import Count
-from django.db.models import Sum
+
+# Модули для расширеной фильтрации по датам в джанго
 from datetime import datetime
 from rangefilter.filters import DateRangeFilterBuilder, DateTimeRangeFilterBuilder, NumericRangeFilterBuilder
-
-
 from django.db.models import DateTimeField
 from django.db.models import Min
 from django.db.models import Max
 from django.db.models.functions import Trunc
 
 
-
+"""Дашборды в панели администратора"""
 @admin.register(Reestr1Summary)
 class Reestr1SummaryAdmin(admin.ModelAdmin):
     change_list_template = 'admin/reestr1_summary_change_list.html'
@@ -50,30 +50,30 @@ class Reestr1SummaryAdmin(admin.ModelAdmin):
         response.context_data['summary_total'] = dict(
             qs.aggregate(**metrics)
         )
+        def get_next_in_date_creation(request, date_hierarchy):
+            if date_hierarchy + '__day' in request.GET:
+                return 'hour'
+            if date_hierarchy + '__month' in request.GET:
+                return 'day'
+            if date_hierarchy + '__year' in request.GET:
+                return 'week'
+            return 'year'
 
-
+        period = get_next_in_date_creation(request, self.date_hierarchy)
+        response.context_data['period'] = period
         summary_over_time = qs.annotate(
             period=Trunc(
                 'date_creation',
-                'day',
+                period,
                 output_field=DateTimeField(),
             ),
-
-
         ).values('period').annotate(total=Count('id')).order_by('period')
-        summary_range = summary_over_time.aggregate(
-            low=Min('total'),
-            high=Max('total'),
-        )
-        high = summary_range.get('high', 0)
-        low = summary_range.get('low', 0)
+
         response.context_data['summary_over_time'] = [{
             'period': x['period'],
             'total': x['total'] or 0,
             'pct': x['total']
         } for x in summary_over_time]
-
-
 
         return response
 
@@ -90,16 +90,10 @@ class Reestr1SummaryAdmin(admin.ModelAdmin):
         ("date_rendering", NumericRangeFilterBuilder()),
     'sp', 'dejat')
 
-    def get_next_in_date_hierarchy(request, date_hierarchy):
-            if date_hierarchy + '__day' in request.GET:
-                return 'hour'
-            if date_hierarchy + '__month' in request.GET:
-                return 'day'
-            if date_hierarchy + '__year' in request.GET:
-                return 'week'
-            return 'month'
 
-list_per_page = 5
+
+
+
 
 @admin.register(Reestr2Summary)
 class Reestr2SummaryAdmin(admin.ModelAdmin):
@@ -136,22 +130,24 @@ class Reestr2SummaryAdmin(admin.ModelAdmin):
             qs.aggregate(**metrics)
         )
 
+        def get_next_in_date_creation(request, date_hierarchy):
+            if date_hierarchy + '__day' in request.GET:
+                return 'hour'
+            if date_hierarchy + '__month' in request.GET:
+                return 'day'
+            if date_hierarchy + '__year' in request.GET:
+                return 'week'
+            return 'month'
 
+        period = get_next_in_date_creation(request, self.date_hierarchy)
+        response.context_data['period'] = period
         summary_over_time = qs.annotate(
             period=Trunc(
                 'date_creation',
-                'day',
+                period,
                 output_field=DateTimeField(),
             ),
-
-
         ).values('period').annotate(total=Count('id')).order_by('period')
-        summary_range = summary_over_time.aggregate(
-            low=Min('total'),
-            high=Max('total'),
-        )
-        high = summary_range.get('high', 0)
-        low = summary_range.get('low', 0)
         response.context_data['summary_over_time'] = [{
             'period': x['period'],
             'total': x['total'] or 0,
@@ -176,18 +172,11 @@ class Reestr2SummaryAdmin(admin.ModelAdmin):
     'cl')
 
 
-    def get_next_in_date_hierarchy(request, date_hierarchy):
-            if date_hierarchy + '__day' in request.GET:
-                return 'hour'
-            if date_hierarchy + '__month' in request.GET:
-                return 'day'
-            if date_hierarchy + '__year' in request.GET:
-                return 'week'
-            return 'month'
 
 
 
 
+"""Отображение моделей в панели администратора"""
 
 class SEZItemInline(admin.TabularInline):
     model = SEZItem
@@ -211,7 +200,7 @@ class Reestr_2Admin(admin.ModelAdmin):
                 default_end=datetime(2030, 1, 1),
             ),
         ),
-        ("date_creation", NumericRangeFilterBuilder()),
+        ("date_creation", NumericRangeFilterBuilder()), "Vip"
     )
 
     inlines = [OTKItemInline]
@@ -232,7 +221,7 @@ class Reestr_1Admin(admin.ModelAdmin):
                 default_end=datetime(2030, 1, 1),
             ),
         ),
-        ("date_rendering", NumericRangeFilterBuilder()),
+        ("date_rendering", NumericRangeFilterBuilder()),"Vip"
     )
     inlines = [SEZItemInline, OTKItemInline]
 

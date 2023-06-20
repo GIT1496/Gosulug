@@ -15,11 +15,7 @@
         <h1> Список решений на выдачу санитарно-эпидемиологических заключений </h1>
            {{ info }}<br>
         <form action="{% url 'search_results2' %}" method="get">
-  <input name="q" type="text" placeholder="Номер решения">
-    <input type="submit" value="Поиск">
-            <br></form>
-                <form action="{% url 'search_results2' %}" method="get">
-  <input name="q" type="text" placeholder="Предприятие">
+  <input name="q" size="60" type="text" placeholder="Номер решения, Фактический адрес, Заявитель">
     <input type="submit" value="Поиск">
 
 {#        {% if perms.Boormag.add_Aythor %}#}

@@ -13,7 +13,7 @@ from .utils import (
     generate_color_palette,get_year_dict)
 # Create your views here.
 
-# Дашборд статистика по заявлениям на решения, деятельность и т.д.
+"""Дашборд статистика по заявлениям на решения, деятельность и т.д."""
 def display_charts(request):
     return render(request, 'analys/charts.html', {})
 

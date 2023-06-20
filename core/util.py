@@ -1,3 +1,4 @@
+# Отображение названия страниц в браузере
 class Default_value:
     def get_default_context(self):
         return {'title': 'Страница'}

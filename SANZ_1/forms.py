@@ -49,7 +49,7 @@ class SEZCreateForm(forms.ModelForm):
 class LICCreateForm(forms.ModelForm):
     class Meta:
         model = LIC1
-        fields = ['Nomer', "date_creation",'INN','OGRN', 'licenz','UR','mesto','vid']
+        fields = ['Nomer', "date_creation", 'vid']
 
         widgets = {
             'Nomer': forms.TextInput(
@@ -58,39 +58,9 @@ class LICCreateForm(forms.ModelForm):
                     'placeholder': 'Номер СЭЗ'
                 }
             ),
-            'licenz': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Наименование лицензиата'
-                }
-            ),
+
             'date_creation': forms.DateInput(format='%Y-%m-%d', attrs={'type': 'date'}),
-            'INN': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'ИНН'
-                }
-            ),
-            'OGRN': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'ОГРН',
-                }
-            ),
 
-            'UR': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Юридический адрес лицензиата',
-                }
-            ),
-
-            'mesto': forms.TextInput(
-                attrs={
-                    'class': 'form-control',
-                    'placeholder': 'Место осуществления деятельности',
-                }
-            ),
             'vid': forms.Select()
         }
 
