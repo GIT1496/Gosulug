@@ -177,7 +177,7 @@ EMAIL_HOST = 'smtp.mail.ru'  # Сервер для отправки писем
 EMAIL_PORT = 465  # Порт сервера SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_USER = 'mikhail_m_bulanov_bulanov@mail.ru'  # Логин пользователя
-EMAIL_HOST_PASSWORD = 'Qf8HJKFy2BnxYXQXiML9'  # Пароль для внешнего приложения из электронного ящика
+EMAIL_HOST_PASSWORD = '*******************'  # Пароль для внешнего приложения из электронного ящика
 EMAIL_USE_TLS_TLS = False  # Протокол шифрования TLS
 EMAIL_USE_SSL = True
 
