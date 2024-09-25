@@ -1,7 +1,7 @@
-Видео с демонстрацией работы:
+Видео с демонстрацией обработки ошибок:
 https://drive.google.com/file/d/1TVd15U1TyoG5A4XnhkdcX497ekt7FEzG/view?usp=drive_link
 
-Видео с обработкой ошибок:
+Видео с демонстрацией работы системы:
 https://drive.google.com/file/d/1evmPnKHNYrKFfrC1qlJPoWNNmCbMrdCV/view?usp=drive_link
 
 
