@@ -1,3 +1,7 @@
+Видео с обработкой ошибок:
+https://drive.google.com/file/d/1TVd15U1TyoG5A4XnhkdcX497ekt7FEzG/view?usp=drive_link
+Видео с демонстрацией работы:
+https://drive.google.com/file/d/1evmPnKHNYrKFfrC1qlJPoWNNmCbMrdCV/view?usp=drive_link
 ![2023-06-05_06-49-43](https://github.com/GIT1496/Gosulug/assets/96841752/28662eec-0ccf-41eb-9cdb-eb29f0806ce4)
 ![2023-06-10_10-11-28](https://github.com/GIT1496/Gosulug/assets/96841752/d7b3b672-171c-48c9-ac44-72a1687d471a)
 # Gosulug
