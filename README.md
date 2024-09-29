@@ -4,7 +4,7 @@
 https://drive.google.com/file/d/1TVd15U1TyoG5A4XnhkdcX497ekt7FEzG/view?usp=drive_link
 
 Видео с демонстрацией работы системы:
-https://drive.google.com/file/d/1evmPnKHNYrKFfrC1qlJPoWNNmCbMrdCV/view?usp=drive_link
+[https://drive.google.com/file/d/1evmPnKHNYrKFfrC1qlJPoWNNmCbMrdCV/view?usp=drive_link](https://drive.google.com/file/d/17iiDoUXllXun2Bu1JwgSE60DOY0mFPN-/view?usp=drive_link)
 
 
 ![2023-06-05_06-49-43](https://github.com/GIT1496/Gosulug/assets/96841752/28662eec-0ccf-41eb-9cdb-eb29f0806ce4)
